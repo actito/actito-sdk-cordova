@@ -18,6 +18,8 @@ agconnect-services.json
 notificare-services.json
 NotificareServices.plist
 local.properties
+*.keystore
+/packages/sample/build.json
 
 # Packed libs
 cordova-plugin-notificare-*.tgz
