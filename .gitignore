@@ -22,7 +22,7 @@ local.properties
 /packages/sample/build.json
 
 # Packed libs
-cordova-plugin-notificare-*.tgz
+cordova-plugin-actito-*.tgz
 
 # fastlane specific
 **/fastlane/report.xml
