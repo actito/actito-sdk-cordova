@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin id="cordova-plugin-actito-push"
+        version="5.0.0-canary.1"
+        xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <name>Actito Push</name>
+
+    <js-module name="ActitoPush" src="build/actito-push.bundle.js">
+        <clobbers target="ActitoPush" />
+        <merges target="cordova.plugins.ActitoPush" />
+    </js-module>
+
+    <asset src="build/actito-push.bundle.js.map" target="plugins/cordova-plugin-actito-push/build/actito-push.bundle.js.map" />
+
+    <platform name="android">
+        <config-file target="config.xml" parent="/*">
+            <preference name="AndroidXEnabled" value="true" />
+
+            <preference name="GradlePluginKotlinEnabled" value="true" />
+            <preference name="GradlePluginKotlinVersion" value="1.9.10" />
+
+            <preference name="GradlePluginGoogleServicesEnabled" value="true" />
+            <preference name="GradlePluginGoogleServicesVersion" value="4.3.14" />
+        </config-file>
+
+        <config-file target="res/xml/config.xml" parent="/widget">
+            <feature name="ActitoPush">
+                <param name="android-package" value="com.actito.push.cordova.ActitoPushPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="ActitoPush">
+                <param name="android-package" value="com.actito.push.cordova.ActitoPushPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <receiver android:name="com.actito.push.cordova.ActitoPushPluginReceiver" android:exported="false" />
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application/activity/[@android:name='MainActivity']">
+            <intent-filter>
+                <action android:name="com.actito.intent.action.RemoteMessageOpened" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </config-file>
+
+        <source-file src="src/android/ActitoPushPlugin.kt" target-dir="app/src/main/kotlin/com/actito/push/cordova" />
+        <source-file src="src/android/ActitoPushPluginEventBroker.kt" target-dir="app/src/main/kotlin/com/actito/push/cordova" />
+        <source-file src="src/android/ActitoPushPluginReceiver.kt" target-dir="app/src/main/kotlin/com/actito/push/cordova" />
+        <source-file src="src/android/Logger.kt" target-dir="app/src/main/kotlin/com/actito/push/cordova" />
+
+        <framework custom="true" src="src/android/build-extras.gradle" type="gradleReference" />
+    </platform>
+
+    <platform name="ios">
+        <hook type="after_prepare" src="src/hooks/ios/after-prepare.js"/>
+
+        <config-file target="config.xml" parent="/*">
+            <feature name="ActitoPush">
+                <param name="ios-package" value="ActitoPushPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <config-file target="*-Info.plist" parent="UIBackgroundModes">
+            <array>
+                <string>remote-notification</string>
+            </array>
+        </config-file>
+
+        <config-file target="*/Entitlements-Debug.plist" parent="aps-environment" >
+            <string>development</string>
+        </config-file>
+
+        <config-file target="*/Entitlements-Release.plist" parent="aps-environment">
+            <string>production</string>
+        </config-file>
+
+        <source-file src="src/ios/ActitoPushPlugin.swift" />
+        <source-file src="src/ios/ActitoPushPluginEventBroker.swift" />
+
+        <podspec>
+            <config>
+                <source url="https://github.com/CocoaPods/Specs.git" />
+            </config>
+            <pods use-frameworks="true">
+                <pod name="Actito/ActitoPushKit" spec="5.0.0-canary.1" />
+            </pods>
+        </podspec>
+    </platform>
+</plugin>
