@@ -1,0 +1,17 @@
+.asset_form_group {
+    padding: 4px 0 0;
+}
+
+.asset_form_field {
+    font-family: inherit;
+    width: 100%;
+    border: 0;
+    outline: 0;
+    font-size: 16px;
+    color: black;
+    background: transparent;
+}
+
+#assetsSearchButton {
+    opacity: 0.5;
+}
