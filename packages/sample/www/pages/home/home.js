@@ -35,7 +35,7 @@ function onActitoReady() {
             <div w3-include-html="views/dnd-card/dnd-card-view.html"></div>
 <!--            <div w3-include-html="views/geo-card/geo-card-view.html"></div>-->
 <!--            <div w3-include-html="views/iam-card/iam-card-view.html"></div>-->
-<!--            <div w3-include-html="views/other-features/other-features-view.html"></div>-->
+            <div w3-include-html="views/other-features/other-features-view.html"></div>
   `;
 
   homeContainer.innerHTML = homeContainerContent;
