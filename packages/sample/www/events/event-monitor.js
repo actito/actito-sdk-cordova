@@ -165,31 +165,31 @@ function setupListeners() {
   //   console.log('=== SCANNABLE SESSION FAILED ===');
   //   console.log(JSON.stringify(error, null, 2));
   // });
-  //
-  // ActitoInAppMessaging.onMessagePresented((message) => {
-  //   console.log('=== MESSAGE PRESENTED ===');
-  //   console.log(JSON.stringify(message, null, 2));
-  // });
-  //
-  // ActitoInAppMessaging.onMessageFinishedPresenting((message) => {
-  //   console.log('=== MESSAGE FINISHED PRESENTING ===');
-  //   console.log(JSON.stringify(message, null, 2));
-  // });
-  //
-  // ActitoInAppMessaging.onMessageFailedToPresent((message) => {
-  //   console.log('=== MESSAGE FAILED TO PRESENT ===');
-  //   console.log(JSON.stringify(message, null, 2));
-  // });
-  //
-  // ActitoInAppMessaging.onActionExecuted(({ message, action }) => {
-  //   console.log('=== ACTION EXECUTED ===');
-  //   console.log(JSON.stringify({ message, action }, null, 2));
-  // });
-  //
-  // ActitoInAppMessaging.onActionFailedToExecute(({ message, action, error }) => {
-  //   console.log('=== ACTION FAILED TO EXECUTE ===');
-  //   console.log(JSON.stringify({ message, action, error }, null, 2));
-  // });
+
+  ActitoInAppMessaging.onMessagePresented((message) => {
+    console.log('=== MESSAGE PRESENTED ===');
+    console.log(JSON.stringify(message, null, 2));
+  });
+
+  ActitoInAppMessaging.onMessageFinishedPresenting((message) => {
+    console.log('=== MESSAGE FINISHED PRESENTING ===');
+    console.log(JSON.stringify(message, null, 2));
+  });
+
+  ActitoInAppMessaging.onMessageFailedToPresent((message) => {
+    console.log('=== MESSAGE FAILED TO PRESENT ===');
+    console.log(JSON.stringify(message, null, 2));
+  });
+
+  ActitoInAppMessaging.onActionExecuted(({ message, action }) => {
+    console.log('=== ACTION EXECUTED ===');
+    console.log(JSON.stringify({ message, action }, null, 2));
+  });
+
+  ActitoInAppMessaging.onActionFailedToExecute(({ message, action, error }) => {
+    console.log('=== ACTION FAILED TO EXECUTE ===');
+    console.log(JSON.stringify({ message, action, error }, null, 2));
+  });
 
   console.log(`---> Actito Listeners are ready <---`);
 }
