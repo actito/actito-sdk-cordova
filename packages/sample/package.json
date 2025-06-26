@@ -24,12 +24,14 @@
     "cordova-plugin-dialogs": "^2.0.2",
     "cordova-plugin-actito": "5.0.0-canary.1",
     "cordova-plugin-actito-assets": "5.0.0-canary.1",
+    "cordova-plugin-actito-geo": "5.0.0-canary.1",
     "ios-deploy": "^1.12.2"
   },
   "cordova": {
     "plugins": {
       "cordova-plugin-actito": {},
       "cordova-plugin-actito-assets": {},
+      "cordova-plugin-actito-geo": {},
       "cordova-plugin-dialogs": {}
     },
     "platforms": [

@@ -27,7 +27,7 @@
         <preference name="ActitoServicesGradlePluginVersion" value="1.0.1" />
         <preference name="AndroidLaunchMode" value="singleTask" />
 
-<!--        <preference name="ActitoBeaconsSupportEnabled" value="true" />-->
+        <preference name="ActitoBeaconsSupportEnabled" value="true" />
 
         <allow-intent href="market:*" />
 

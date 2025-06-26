@@ -111,46 +111,46 @@ function setupListeners() {
   //   console.log('=== CUSTOM ACTION RECEIVED ===');
   //   console.log(JSON.stringify(data));
   // });
-  //
-  // ActitoGeo.onLocationUpdated((location) => {
-  //   console.log('=== LOCATION UPDATED ===');
-  //   console.log(JSON.stringify(location, null, 2));
-  // });
-  //
-  // ActitoGeo.onRegionEntered((region) => {
-  //   console.log('=== REGION ENTERED ===');
-  //   console.log(JSON.stringify(region, null, 2));
-  // });
-  //
-  // ActitoGeo.onRegionExited((region) => {
-  //   console.log('=== REGION EXITED ===');
-  //   console.log(JSON.stringify(region, null, 2));
-  // });
-  //
-  // ActitoGeo.onBeaconEntered((beacon) => {
-  //   console.log('=== BEACON ENTERED ===');
-  //   console.log(JSON.stringify(beacon, null, 2));
-  // });
-  //
-  // ActitoGeo.onBeaconExited((beacon) => {
-  //   console.log('=== BEACON EXITED ===');
-  //   console.log(JSON.stringify(beacon, null, 2));
-  // });
-  //
-  // ActitoGeo.onBeaconsRanged(({ region, beacons }) => {
-  //   console.log('=== BEACONS RANGED ===');
-  //   console.log(JSON.stringify({ region, beacons }, null, 2));
-  // });
-  //
-  // ActitoGeo.onVisit((visit) => {
-  //   console.log('=== VISIT ===');
-  //   console.log(JSON.stringify(visit, null, 2));
-  // });
-  //
-  // ActitoGeo.onHeadingUpdated((heading) => {
-  //   console.log('=== HEADING UPDATED ===');
-  //   console.log(JSON.stringify(heading, null, 2));
-  // });
+
+  ActitoGeo.onLocationUpdated((location) => {
+    console.log('=== LOCATION UPDATED ===');
+    console.log(JSON.stringify(location, null, 2));
+  });
+
+  ActitoGeo.onRegionEntered((region) => {
+    console.log('=== REGION ENTERED ===');
+    console.log(JSON.stringify(region, null, 2));
+  });
+
+  ActitoGeo.onRegionExited((region) => {
+    console.log('=== REGION EXITED ===');
+    console.log(JSON.stringify(region, null, 2));
+  });
+
+  ActitoGeo.onBeaconEntered((beacon) => {
+    console.log('=== BEACON ENTERED ===');
+    console.log(JSON.stringify(beacon, null, 2));
+  });
+
+  ActitoGeo.onBeaconExited((beacon) => {
+    console.log('=== BEACON EXITED ===');
+    console.log(JSON.stringify(beacon, null, 2));
+  });
+
+  ActitoGeo.onBeaconsRanged(({ region, beacons }) => {
+    console.log('=== BEACONS RANGED ===');
+    console.log(JSON.stringify({ region, beacons }, null, 2));
+  });
+
+  ActitoGeo.onVisit((visit) => {
+    console.log('=== VISIT ===');
+    console.log(JSON.stringify(visit, null, 2));
+  });
+
+  ActitoGeo.onHeadingUpdated((heading) => {
+    console.log('=== HEADING UPDATED ===');
+    console.log(JSON.stringify(heading, null, 2));
+  });
   //
   // ActitoScannables.onScannableDetected(async (scannable) => {
   //   console.log('=== SCANNABLE DETECTED ===');
