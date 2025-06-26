@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin id="cordova-plugin-actito-in-app-messaging"
+        version="5.0.0-canary.1"
+        xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <name>Actito In-App Messaging</name>
+
+    <js-module name="ActitoInAppMessaging" src="build/actito-in-app-messaging.bundle.js">
+        <clobbers target="ActitoInAppMessaging" />
+        <merges target="cordova.plugins.ActitoInAppMessaging" />
+    </js-module>
+
+    <asset src="build/actito-in-app-messaging.bundle.js.map" target="plugins/cordova-plugin-actito-in-app-messaging/build/actito-in-app-messaging.bundle.js.map" />
+
+    <platform name="android">
+        <config-file target="config.xml" parent="/*">
+            <preference name="AndroidXEnabled" value="true" />
+
+            <preference name="GradlePluginKotlinEnabled" value="true" />
+            <preference name="GradlePluginKotlinVersion" value="1.9.10" />
+
+            <preference name="GradlePluginGoogleServicesEnabled" value="true" />
+            <preference name="GradlePluginGoogleServicesVersion" value="4.3.14" />
+        </config-file>
+
+        <config-file target="res/xml/config.xml" parent="/widget">
+            <feature name="ActitoInAppMessaging">
+                <param name="android-package" value="com.actito.iam.cordova.ActitoInAppMessagingPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="ActitoInAppMessaging">
+                <param name="android-package" value="com.actito.iam.cordova.ActitoInAppMessagingPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/ActitoInAppMessagingPlugin.kt" target-dir="app/src/main/kotlin/com/actito/iam/cordova" />
+        <source-file src="src/android/ActitoInAppMessagingPluginEventBroker.kt" target-dir="app/src/main/kotlin/com/actito/iam/cordova" />
+        <source-file src="src/android/Logger.kt" target-dir="app/src/main/kotlin/com/actito/iam/cordova" />
+
+        <framework custom="true" src="src/android/build-extras.gradle" type="gradleReference" />
+    </platform>
+
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="ActitoInAppMessaging">
+                <param name="ios-package" value="ActitoInAppMessagingPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <source-file src="src/ios/ActitoInAppMessagingPlugin.swift" />
+        <source-file src="src/ios/ActitoInAppMessagingPluginEventBroker.swift" />
+
+        <podspec>
+            <config>
+                <source url="https://github.com/CocoaPods/Specs.git" />
+            </config>
+            <pods use-frameworks="true">
+                <pod name="Actito/ActitoInAppMessagingKit" spec="5.0.0-canary.1" />
+            </pods>
+        </podspec>
+    </platform>
+</plugin>
