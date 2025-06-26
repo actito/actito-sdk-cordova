@@ -31,7 +31,7 @@ function onActitoReady() {
 
   const homeContainerContent = `
             <div w3-include-html="views/current-device-card/current-device-card-view.html"></div>
-<!--            <div w3-include-html="views/remote-notifications-card/remote-notifications-card-view.html"></div>-->
+            <div w3-include-html="views/remote-notifications-card/remote-notifications-card-view.html"></div>
             <div w3-include-html="views/dnd-card/dnd-card-view.html"></div>
             <div w3-include-html="views/geo-card/geo-card-view.html"></div>
             <div w3-include-html="views/iam-card/iam-card-view.html"></div>
@@ -52,7 +52,7 @@ async function launch() {
   console.log(`---> Launching Actito <---`);
 
   try {
-    // await ActitoPush.setPresentationOptions(['banner', 'badge', 'sound']);
+    await ActitoPush.setPresentationOptions(['banner', 'badge', 'sound']);
     await Actito.launch();
   } catch (e) {
     console.log('=== Error launching actito ===');
