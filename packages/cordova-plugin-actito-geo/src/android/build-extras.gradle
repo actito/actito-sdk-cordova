@@ -1,0 +1,26 @@
+android {
+    kotlinOptions {
+        jvmTarget = cordovaConfig.KOTLIN_JVM_TARGET ?: '1.8'
+        freeCompilerArgs += [
+                '-Xopt-in=com.actito.InternalActitoApi',
+        ]
+    }
+}
+
+repositories {
+    google()
+    mavenCentral()
+
+    maven { url 'https://maven.notifica.re/releases' }
+    maven { url 'https://maven.notifica.re/prereleases' }
+}
+
+dependencies {
+    def actito_version = '5.0.0-canary.2'
+    api "com.actito:actito:$actito_version"
+    api "com.actito:actito-geo:$actito_version"
+
+    if ((project.findProperty('actitoBeaconsSupportEnabled') ?: true).toBoolean()) {
+        implementation "com.actito:actito-geo-beacons:$actito_version"
+    }
+}
