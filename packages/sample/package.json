@@ -28,6 +28,7 @@
     "cordova-plugin-actito-in-app-messaging": "5.0.0-canary.1",
     "cordova-plugin-actito-inbox": "5.0.0-canary.1",
     "cordova-plugin-actito-push": "5.0.0-canary.1",
+    "cordova-plugin-actito-push-ui": "5.0.0-canary.1",
     "ios-deploy": "^1.12.2"
   },
   "cordova": {
@@ -38,6 +39,7 @@
       "cordova-plugin-actito-in-app-messaging": {},
       "cordova-plugin-actito-inbox": {},
       "cordova-plugin-actito-push": {},
+      "cordova-plugin-actito-push-ui": {},
       "cordova-plugin-dialogs": {}
     },
     "platforms": [
