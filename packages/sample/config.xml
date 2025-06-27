@@ -93,6 +93,13 @@
             </array>
         </config-file>
 
+        <config-file target="*/Entitlements-Debug.plist" parent="com.apple.developer.nfc.readersession.formats">
+            <array>
+                <string>NDEF</string>
+                <string>TAG</string>
+            </array>
+        </config-file>
+
         <config-file target="*-Info.plist" parent="NFCReaderUsageDescription">
             <string>We will need access to the device's NFC reader to unlock new content.</string>
         </config-file>

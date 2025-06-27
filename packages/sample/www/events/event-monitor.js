@@ -151,20 +151,20 @@ function setupListeners() {
     console.log('=== HEADING UPDATED ===');
     console.log(JSON.stringify(heading, null, 2));
   });
-  //
-  // ActitoScannables.onScannableDetected(async (scannable) => {
-  //   console.log('=== SCANNABLE DETECTED ===');
-  //   console.log(JSON.stringify(scannable, null, 2));
-  //
-  //   if (scannable.notification != null) {
-  //     await ActitoPushUI.presentNotification(scannable.notification);
-  //   }
-  // });
-  //
-  // ActitoScannables.onScannableSessionFailed((error) => {
-  //   console.log('=== SCANNABLE SESSION FAILED ===');
-  //   console.log(JSON.stringify(error, null, 2));
-  // });
+
+  ActitoScannables.onScannableDetected(async (scannable) => {
+    console.log('=== SCANNABLE DETECTED ===');
+    console.log(JSON.stringify(scannable, null, 2));
+
+    if (scannable.notification != null) {
+      await ActitoPushUI.presentNotification(scannable.notification);
+    }
+  });
+
+  ActitoScannables.onScannableSessionFailed((error) => {
+    console.log('=== SCANNABLE SESSION FAILED ===');
+    console.log(JSON.stringify(error, null, 2));
+  });
 
   ActitoInAppMessaging.onMessagePresented((message) => {
     console.log('=== MESSAGE PRESENTED ===');
