@@ -26,6 +26,7 @@
     "cordova-plugin-actito-assets": "5.0.0-canary.1",
     "cordova-plugin-actito-geo": "5.0.0-canary.1",
     "cordova-plugin-actito-in-app-messaging": "5.0.0-canary.1",
+    "cordova-plugin-actito-push": "5.0.0-canary.1",
     "ios-deploy": "^1.12.2"
   },
   "cordova": {
@@ -34,6 +35,7 @@
       "cordova-plugin-actito-assets": {},
       "cordova-plugin-actito-geo": {},
       "cordova-plugin-actito-in-app-messaging": {},
+      "cordova-plugin-actito-push": {},
       "cordova-plugin-dialogs": {}
     },
     "platforms": [

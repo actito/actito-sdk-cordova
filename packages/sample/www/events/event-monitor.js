@@ -25,35 +25,35 @@ function setupListeners() {
     console.log(`---> Device registered: ${JSON.stringify(device)}`);
   });
 
-  // ActitoPush.onNotificationInfoReceived(({ notification, deliveryMechanism }) => {
-  //   console.log(`---> Received notification = ${JSON.stringify(notification)}`);
-  //   console.log(`---> Delivery mechanism = ${deliveryMechanism}`);
-  // });
-  //
-  // ActitoPush.onUnknownNotificationReceived((notification) => {
-  //   console.log(`---> Unknown notification received = ${JSON.stringify(notification)}`);
-  // });
-  //
-  // ActitoPush.onNotificationOpened(async (notification) => {
-  //   console.log(`---> Opened notification = ${JSON.stringify(notification)}`);
-  //
-  //   await ActitoPushUI.presentNotification(notification);
-  // });
-  //
-  // ActitoPush.onUnknownNotificationOpened((notification) => {
-  //   console.log(`---> Opened unknown notification = ${JSON.stringify(notification)}`);
-  // });
-  //
-  // ActitoPush.onNotificationSettingsChanged((granted) => {
-  //   console.log('=== NOTIFICATION SETTINGS CHANGED ===');
-  //   console.log(JSON.stringify(granted, null, 2));
-  // });
-  //
-  // ActitoPush.onSubscriptionChanged((subscription) => {
-  //   console.log('=== SUBSCRIPTION CHANGED ===');
-  //   console.log(JSON.stringify(subscription, null, 2));
-  // });
-  //
+  ActitoPush.onNotificationInfoReceived(({ notification, deliveryMechanism }) => {
+    console.log(`---> Received notification = ${JSON.stringify(notification)}`);
+    console.log(`---> Delivery mechanism = ${deliveryMechanism}`);
+  });
+
+  ActitoPush.onUnknownNotificationReceived((notification) => {
+    console.log(`---> Unknown notification received = ${JSON.stringify(notification)}`);
+  });
+
+  ActitoPush.onNotificationOpened(async (notification) => {
+    console.log(`---> Opened notification = ${JSON.stringify(notification)}`);
+
+    // await ActitoPushUI.presentNotification(notification);
+  });
+
+  ActitoPush.onUnknownNotificationOpened((notification) => {
+    console.log(`---> Opened unknown notification = ${JSON.stringify(notification)}`);
+  });
+
+  ActitoPush.onNotificationSettingsChanged((granted) => {
+    console.log('=== NOTIFICATION SETTINGS CHANGED ===');
+    console.log(JSON.stringify(granted, null, 2));
+  });
+
+  ActitoPush.onSubscriptionChanged((subscription) => {
+    console.log('=== SUBSCRIPTION CHANGED ===');
+    console.log(JSON.stringify(subscription, null, 2));
+  });
+
   // ActitoInbox.onBadgeUpdated((badge) => {
   //   console.log(`---> Badge updated = ${badge}`);
   // });
