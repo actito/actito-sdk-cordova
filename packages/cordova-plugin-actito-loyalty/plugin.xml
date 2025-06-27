@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin id="cordova-plugin-actito-loyalty"
+        version="5.0.0-canary.1"
+        xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <name>Actito Loyalty</name>
+
+    <js-module name="ActitoLoyalty" src="build/actito-loyalty.bundle.js">
+        <clobbers target="ActitoLoyalty" />
+        <merges target="cordova.plugins.ActitoLoyalty" />
+    </js-module>
+
+    <asset src="build/actito-loyalty.bundle.js.map" target="plugins/cordova-plugin-actito-loyalty/build/actito-loyalty.bundle.js.map" />
+
+    <platform name="android">
+        <config-file target="config.xml" parent="/*">
+            <preference name="AndroidXEnabled" value="true" />
+
+            <preference name="GradlePluginKotlinEnabled" value="true" />
+            <preference name="GradlePluginKotlinVersion" value="1.9.10" />
+        </config-file>
+
+        <config-file target="res/xml/config.xml" parent="/widget">
+            <feature name="ActitoLoyalty">
+                <param name="android-package" value="com.actito.loyalty.cordova.ActitoLoyaltyPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="ActitoLoyalty">
+                <param name="android-package" value="com.actito.loyalty.cordova.ActitoLoyaltyPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity
+                    android:name="com.actito.loyalty.PassbookActivity"
+                    android:theme="@style/Theme.AppCompat.Light" />
+        </config-file>
+
+        <source-file src="src/android/ActitoLoyaltyPlugin.kt" target-dir="app/src/main/kotlin/com/actito/loyalty/cordova" />
+
+        <framework custom="true" src="src/android/build-extras.gradle" type="gradleReference" />
+    </platform>
+
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="ActitoLoyalty">
+                <param name="ios-package" value="ActitoLoyaltyPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <source-file src="src/ios/ActitoLoyaltyPlugin.swift" />
+
+        <podspec>
+            <config>
+                <source url="https://github.com/CocoaPods/Specs.git" />
+            </config>
+            <pods use-frameworks="true">
+                <pod name="Actito/ActitoLoyaltyKit" spec="5.0.0-canary.1" />
+            </pods>
+        </podspec>
+    </platform>
+</plugin>
