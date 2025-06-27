@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin id="cordova-plugin-actito-user-inbox"
+        version="5.0.0-canary.1"
+        xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <name>Actito User Inbox</name>
+
+    <js-module name="ActitoUserInbox" src="build/actito-user-inbox.bundle.js">
+        <clobbers target="ActitoUserInbox" />
+        <merges target="cordova.plugins.ActitoUserInbox" />
+    </js-module>
+
+    <asset src="build/actito-user-inbox.bundle.js.map" target="plugins/cordova-plugin-actito-user-inbox/build/actito-user-inbox.bundle.js.map" />
+
+    <platform name="android">
+        <config-file target="config.xml" parent="/*">
+            <preference name="AndroidXEnabled" value="true" />
+
+            <preference name="GradlePluginKotlinEnabled" value="true" />
+            <preference name="GradlePluginKotlinVersion" value="1.9.10" />
+        </config-file>
+
+        <config-file target="res/xml/config.xml" parent="/widget">
+            <feature name="ActitoUserInbox">
+                <param name="android-package" value="com.actito.inbox.user.cordova.ActitoUserInboxPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="ActitoUserInbox">
+                <param name="android-package" value="com.actito.inbox.user.cordova.ActitoUserInboxPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/ActitoUserInboxPlugin.kt" target-dir="app/src/main/kotlin/com/actito/inbox/user/cordova" />
+
+        <framework custom="true" src="src/android/build-extras.gradle" type="gradleReference" />
+    </platform>
+
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="ActitoUserInbox">
+                <param name="ios-package" value="ActitoUserInboxPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <source-file src="src/ios/ActitoUserInboxPlugin.swift" />
+
+        <podspec>
+            <config>
+                <source url="https://github.com/CocoaPods/Specs.git" />
+            </config>
+            <pods use-frameworks="true">
+                <pod name="Actito/ActitoUserInboxKit" spec="5.0.0-canary.1" />
+            </pods>
+        </podspec>
+    </platform>
+</plugin>
