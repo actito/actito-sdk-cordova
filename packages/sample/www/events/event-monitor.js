@@ -54,38 +54,13 @@ function setupListeners() {
     console.log(JSON.stringify(subscription, null, 2));
   });
 
-  // ActitoInbox.onBadgeUpdated((badge) => {
-  //   console.log(`---> Badge updated = ${badge}`);
-  // });
-  //
-  // ActitoInbox.onInboxUpdated((items) => {
-  //   console.log(`---> Inbox updated = ${JSON.stringify(items)}`);
-  // });
-  //
-  // ActitoPushUI.onNotificationWillPresent((notification) => {
-  //   console.log('=== NOTIFICATION WILL PRESENT ===');
-  //   console.log(JSON.stringify(notification));
-  // });
-  //
-  // ActitoPushUI.onNotificationPresented((notification) => {
-  //   console.log('=== NOTIFICATION PRESENTED ===');
-  //   console.log(JSON.stringify(notification));
-  // });
-  //
-  // ActitoPushUI.onNotificationFinishedPresenting((notification) => {
-  //   console.log('=== NOTIFICATION FINISHED PRESENTING ===');
-  //   console.log(JSON.stringify(notification));
-  // });
-  //
-  // ActitoPushUI.onNotificationFailedToPresent((notification) => {
-  //   console.log('=== NOTIFICATION FAILED TO PRESENT ===');
-  //   console.log(JSON.stringify(notification));
-  // });
-  //
-  // ActitoPushUI.onNotificationUrlClicked((data) => {
-  //   console.log('=== NOTIFICATION URL CLICKED ===');
-  //   console.log(JSON.stringify(data));
-  // });
+  ActitoInbox.onBadgeUpdated((badge) => {
+    console.log(`---> Badge updated = ${badge}`);
+  });
+
+  ActitoInbox.onInboxUpdated((items) => {
+    console.log(`---> Inbox updated = ${JSON.stringify(items)}`);
+  });
   //
   // ActitoPushUI.onActionWillExecute((data) => {
   //   console.log('=== ACTION WILL EXECUTE ===');
