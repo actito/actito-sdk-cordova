@@ -72,7 +72,7 @@ function applyAppGradleActitoPlugin(context) {
 
   if (!gradle.endsWith('\n')) gradle += '\n';
 
-  gradle += plugin + '\n';
+  gradle += '\n' + plugin + '\n';
   fs.writeFileSync(appGradlePath, gradle, 'utf8');
 
   console.log('Actito plugin applied in app/build.gradle');
