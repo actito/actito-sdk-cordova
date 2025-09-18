@@ -22,7 +22,7 @@
         <preference name="android-buildToolsVersion" value="35.0.0" />
 
         <preference name="AndroidGradlePluginVersion" value="8.11.1" />
-        <preference name="ActitoServicesGradlePluginVersion" value="1.0.1" />
+        <preference name="ActitoServicesGradlePluginVersion" value="1.1.0" />
         <preference name="AndroidLaunchMode" value="singleTask" />
 
         <preference name="ActitoBeaconsSupportEnabled" value="true" />
