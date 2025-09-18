@@ -39,7 +39,7 @@ function updateRootGradleActitoPlugin(context) {
     console.log(`Updated ${pluginDependency}:${pluginVersion} in android/build.gradle.`);
   } else {
     const lines = gradle.split('\n');
-    let lastClasspathIndex = -1;
+    let lastClasspathIndex;
 
     lines.forEach((line, idx) => {
       if (line.trim().startsWith('classpath')) {
@@ -47,14 +47,14 @@ function updateRootGradleActitoPlugin(context) {
       }
     });
 
-    if (lastClasspathIndex >= 0) {
-      lines.splice(lastClasspathIndex + 1, 0, '        ' + plugin);
-      gradle = lines.join('\n');
-
-      console.log(`Added ${pluginDependency}:${pluginVersion} to android/build.gradle.`);
-    } else {
+    if (!lastClasspathIndex) {
       throw new Error('Failed to add Actito plugin dependency to android/build.gradle.');
     }
+
+    lines.splice(lastClasspathIndex + 1, 0, '        ' + plugin);
+    gradle = lines.join('\n');
+
+    console.log(`Added ${pluginDependency}:${pluginVersion} to android/build.gradle.`);
   }
 
   fs.writeFileSync(rootGradlePath, gradle, 'utf8');
