@@ -10,6 +10,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import com.actito.Actito
 import com.actito.ActitoCallback
+import com.actito.ActitoIntentReceiver
 import com.actito.ktx.device
 import com.actito.ktx.events
 import com.actito.models.*
@@ -19,7 +20,9 @@ class ActitoPlugin : CordovaPlugin() {
     override fun pluginInitialize() {
         logger.hasDebugLoggingEnabled = Actito.options?.debugLoggingEnabled ?: false
 
-        Actito.intentReceiver = ActitoPluginReceiver::class.java
+        if (Actito.intentReceiver == ActitoIntentReceiver::class.java) {
+            Actito.intentReceiver = ActitoPluginReceiver::class.java
+        }
 
         val intent = cordova.activity.intent
         if (intent != null) onNewIntent(intent)
