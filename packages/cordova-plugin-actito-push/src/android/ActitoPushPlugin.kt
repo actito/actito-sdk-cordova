@@ -24,6 +24,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import com.actito.Actito
 import com.actito.ActitoCallback
+import com.actito.push.ActitoPushIntentReceiver
 import com.actito.push.ktx.push
 import com.actito.push.models.ActitoPushSubscription
 
@@ -47,7 +48,9 @@ class ActitoPushPlugin : CordovaPlugin() {
     override fun pluginInitialize() {
         logger.hasDebugLoggingEnabled = Actito.options?.debugLoggingEnabled ?: false
 
-        Actito.push().intentReceiver = ActitoPushPluginReceiver::class.java
+        if (Actito.push().intentReceiver == ActitoPushIntentReceiver::class.java) {
+            Actito.push().intentReceiver = ActitoPushPluginReceiver::class.java
+        }
 
         onMainThread {
             Actito.push().observableAllowedUI.observeForever(allowedUIObserver)
