@@ -5,7 +5,7 @@ import com.actito.ActitoIntentReceiver
 import com.actito.models.ActitoApplication
 import com.actito.models.ActitoDevice
 
-class ActitoPluginReceiver : ActitoIntentReceiver() {
+open class ActitoPluginReceiver : ActitoIntentReceiver() {
 
     override fun onReady(context: Context, application: ActitoApplication) {
         try {
