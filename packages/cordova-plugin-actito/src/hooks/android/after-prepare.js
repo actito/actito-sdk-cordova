@@ -3,13 +3,23 @@
 const fs = require('fs');
 const path = require('path');
 const utils = require('../utils');
-const { isPreferenceSet } = require('../utils');
+const { isPreferenceSet, isPreferenceOptedIn } = require('../utils');
 
 const ACTITO_SERVICES_GRADLE_PLUGIN_VERSION = '1.1.0';
 
 module.exports = function (context) {
   // Make sure android platform is part of build
   if (!context.opts.platforms.includes('android')) return;
+
+  const appConfig = utils.getCordovaAppConfig(context);
+
+  if (
+    isPreferenceSet(appConfig, 'ActitoServicesGradlePluginEnabled', 'android') &&
+    !isPreferenceOptedIn(appConfig, 'ActitoServicesGradlePluginEnabled', 'android')
+  ) {
+    console.log(`Actito Services Gradle plugin preference is opted-out, skipping automatic configuration.`);
+    return;
+  }
 
   updateRootGradleActitoPlugin(context);
   applyAppGradleActitoPlugin(context);
