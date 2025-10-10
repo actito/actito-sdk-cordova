@@ -30,7 +30,6 @@
     "cordova-plugin-actito-loyalty": "5.0.0-canary.1",
     "cordova-plugin-actito-push": "5.0.0-canary.1",
     "cordova-plugin-actito-push-ui": "5.0.0-canary.1",
-    "cordova-plugin-actito-scannables": "5.0.0-canary.1",
     "ios-deploy": "^1.12.2"
   },
   "cordova": {
@@ -43,7 +42,6 @@
       "cordova-plugin-actito-loyalty": {},
       "cordova-plugin-actito-push": {},
       "cordova-plugin-actito-push-ui": {},
-      "cordova-plugin-actito-scannables": {},
       "cordova-plugin-dialogs": {}
     },
     "platforms": [
