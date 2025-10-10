@@ -5,6 +5,9 @@ import { ActitoNotificationDeliveryMechanism } from './models/actito-notificatio
 import { PushPermissionRationale, PushPermissionStatus } from './permissions';
 import { ActitoTransport } from './models/actito-transport';
 import { ActitoPushSubscription } from './models/actito-push-subscription';
+import { ActitoAuthorizationOptions } from './models/actito-authorization-options';
+import { ActitoCategoryOptions } from './models/actito-category-options';
+import { ActitoPresentationOptions } from './models/actito-presentation-options';
 
 export class ActitoPush {
   /**
@@ -17,7 +20,7 @@ export class ActitoPush {
    * @returns {Promise<void>} - A promise that resolves when the authorization
    * options have been successfully set.
    */
-  public static async setAuthorizationOptions(options: string[]): Promise<void> {
+  public static async setAuthorizationOptions(options: ActitoAuthorizationOptions[]): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       cordova.exec(resolve, reject, 'ActitoPush', 'setAuthorizationOptions', [options]);
     });
@@ -32,7 +35,7 @@ export class ActitoPush {
    * @returns {Promise<void>} - A promise that resolves when the category options
    * have been successfully set.
    */
-  public static async setCategoryOptions(options: string[]): Promise<void> {
+  public static async setCategoryOptions(options: ActitoCategoryOptions[]): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       cordova.exec(resolve, reject, 'ActitoPush', 'setCategoryOptions', [options]);
     });
@@ -48,7 +51,7 @@ export class ActitoPush {
    * @returns {Promise<void>} - A promise that resolves when the presentation
    * options have been successfully set.
    */
-  public static async setPresentationOptions(options: string[]): Promise<void> {
+  public static async setPresentationOptions(options: ActitoPresentationOptions[]): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       cordova.exec(resolve, reject, 'ActitoPush', 'setPresentationOptions', [options]);
     });
