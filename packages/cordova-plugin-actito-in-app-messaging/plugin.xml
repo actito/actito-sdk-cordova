@@ -61,7 +61,7 @@
                 <source url="https://github.com/CocoaPods/Specs.git" />
             </config>
             <pods use-frameworks="true">
-                <pod name="Actito/ActitoInAppMessagingKit" spec="5.0.0-canary.1" />
+                <pod name="Actito/ActitoInAppMessagingKit" spec="5.0.0-canary.5" />
             </pods>
         </podspec>
     </platform>
