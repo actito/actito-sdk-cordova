@@ -3,18 +3,18 @@ package com.actito.inbox.cordova
 import android.os.Handler
 import android.os.Looper
 import androidx.lifecycle.Observer
+import com.actito.Actito
+import com.actito.ActitoCallback
+import com.actito.inbox.ktx.inbox
+import com.actito.inbox.models.ActitoInboxItem
+import com.actito.models.ActitoNotification
 import org.apache.cordova.CallbackContext
 import org.apache.cordova.CordovaArgs
 import org.apache.cordova.CordovaPlugin
 import org.apache.cordova.PluginResult
 import org.json.JSONArray
 import org.json.JSONObject
-import com.actito.Actito
-import com.actito.ActitoCallback
-import com.actito.inbox.ktx.inbox
-import com.actito.inbox.models.ActitoInboxItem
-import com.actito.models.ActitoNotification
-import java.util.*
+import java.util.SortedSet
 
 class ActitoInboxPlugin : CordovaPlugin() {
 
@@ -94,8 +94,15 @@ class ActitoInboxPlugin : CordovaPlugin() {
     }
 
     private fun refresh(@Suppress("UNUSED_PARAMETER") args: CordovaArgs, callback: CallbackContext) {
-        Actito.inbox().refresh()
-        callback.void()
+        Actito.inbox().refresh(object : ActitoCallback<Unit> {
+            override fun onSuccess(result: Unit) {
+                callback.void()
+            }
+
+            override fun onFailure(e: Exception) {
+                callback.error(e.message)
+            }
+        })
     }
 
     private fun open(@Suppress("UNUSED_PARAMETER") args: CordovaArgs, callback: CallbackContext) {

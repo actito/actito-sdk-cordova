@@ -47,10 +47,16 @@ class ActitoInboxPlugin : CDVPlugin {
     }
 
     @objc func refresh(_ command: CDVInvokedUrlCommand) {
-        Actito.shared.inbox().refresh()
-
-        let result = CDVPluginResult(status: .ok)
-        self.commandDelegate!.send(result, callbackId: command.callbackId)
+        Actito.shared.inbox().refresh { result in
+            switch result {
+            case .success:
+                let result = CDVPluginResult(status: .ok)
+                self.commandDelegate!.send(result, callbackId: command.callbackId)
+            case let .failure(error):
+                let result = CDVPluginResult(status: .error, messageAs: error.localizedDescription)
+                self.commandDelegate!.send(result, callbackId: command.callbackId)
+            }
+        }
     }
 
     @objc func open(_ command: CDVInvokedUrlCommand) {
