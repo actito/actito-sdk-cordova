@@ -8,6 +8,7 @@ class ActitoPushPluginEventBroker {
     private static var consumer: Consumer?
     private static var canEmitEvents = false
 
+    @MainActor
     static func startListening(settings: [AnyHashable : Any]?, _ consumer: @escaping Consumer) {
         let holdEventsUntilReady = settings?["com.actito.cordova.hold_events_until_ready"] as? String == "true"
 

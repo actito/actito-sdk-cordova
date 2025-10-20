@@ -1,6 +1,7 @@
 import ActitoKit
 import ActitoInboxKit
 
+@MainActor
 @objc(ActitoInboxPlugin)
 class ActitoInboxPlugin : CDVPlugin {
 
