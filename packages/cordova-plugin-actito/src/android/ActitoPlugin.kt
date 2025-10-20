@@ -2,18 +2,24 @@ package com.actito.cordova
 
 import android.content.Intent
 import android.net.Uri
+import com.actito.Actito
+import com.actito.ActitoCallback
+import com.actito.ActitoEventData
+import com.actito.ActitoIntentReceiver
+import com.actito.internal.ktx.toEventData
+import com.actito.ktx.device
+import com.actito.ktx.events
+import com.actito.models.ActitoApplication
+import com.actito.models.ActitoDoNotDisturb
+import com.actito.models.ActitoDynamicLink
+import com.actito.models.ActitoNotification
+import com.actito.models.ActitoUserData
 import org.apache.cordova.CallbackContext
 import org.apache.cordova.CordovaArgs
 import org.apache.cordova.CordovaPlugin
 import org.apache.cordova.PluginResult
 import org.json.JSONArray
 import org.json.JSONObject
-import com.actito.Actito
-import com.actito.ActitoCallback
-import com.actito.ActitoIntentReceiver
-import com.actito.ktx.device
-import com.actito.ktx.events
-import com.actito.models.*
 
 class ActitoPlugin : CordovaPlugin() {
 
@@ -468,7 +474,7 @@ class ActitoPlugin : CordovaPlugin() {
         val json: JSONObject? = if (!args.isNull(1)) args.getJSONObject(1) else null
 
         val data: ActitoEventData? = try {
-            json?.let { ActitoEvent.createData(it) }
+            json?.toEventData()
         } catch (e: Exception) {
             callback.error(e.message)
             return
