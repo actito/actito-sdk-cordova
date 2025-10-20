@@ -45,21 +45,23 @@ class ActitoUserInboxPlugin : CDVPlugin {
             return
         }
 
-        Actito.shared.userInbox().open(item) { result in
-            switch result {
-            case let .success(notification):
-                do {
-                    let json = try notification.toJson()
+        DispatchQueue.main.async {
+            Actito.shared.userInbox().open(item) { result in
+                switch result {
+                case let .success(notification):
+                    do {
+                        let json = try notification.toJson()
 
-                    let result = CDVPluginResult(status: .ok, messageAs: json)
-                    self.commandDelegate!.send(result, callbackId: command.callbackId)
-                } catch {
+                        let result = CDVPluginResult(status: .ok, messageAs: json)
+                        self.commandDelegate!.send(result, callbackId: command.callbackId)
+                    } catch {
+                        let result = CDVPluginResult(status: .error, messageAs: error.localizedDescription)
+                        self.commandDelegate!.send(result, callbackId: command.callbackId)
+                    }
+                case let .failure(error):
                     let result = CDVPluginResult(status: .error, messageAs: error.localizedDescription)
                     self.commandDelegate!.send(result, callbackId: command.callbackId)
                 }
-            case let .failure(error):
-                let result = CDVPluginResult(status: .error, messageAs: error.localizedDescription)
-                self.commandDelegate!.send(result, callbackId: command.callbackId)
             }
         }
     }
@@ -77,14 +79,16 @@ class ActitoUserInboxPlugin : CDVPlugin {
             return
         }
 
-        Actito.shared.userInbox().markAsRead(item) { result in
-            switch result {
-            case .success:
-                let result = CDVPluginResult(status: .ok)
-                self.commandDelegate!.send(result, callbackId: command.callbackId)
-            case let .failure(error):
-                let result = CDVPluginResult(status: .error, messageAs: error.localizedDescription)
-                self.commandDelegate!.send(result, callbackId: command.callbackId)
+        DispatchQueue.main.async {
+            Actito.shared.userInbox().markAsRead(item) { result in
+                switch result {
+                case .success:
+                    let result = CDVPluginResult(status: .ok)
+                    self.commandDelegate!.send(result, callbackId: command.callbackId)
+                case let .failure(error):
+                    let result = CDVPluginResult(status: .error, messageAs: error.localizedDescription)
+                    self.commandDelegate!.send(result, callbackId: command.callbackId)
+                }
             }
         }
     }
@@ -102,14 +106,16 @@ class ActitoUserInboxPlugin : CDVPlugin {
             return
         }
 
-        Actito.shared.userInbox().remove(item) { result in
-            switch result {
-            case .success:
-                let result = CDVPluginResult(status: .ok)
-                self.commandDelegate!.send(result, callbackId: command.callbackId)
-            case let .failure(error):
-                let result = CDVPluginResult(status: .error, messageAs: error.localizedDescription)
-                self.commandDelegate!.send(result, callbackId: command.callbackId)
+        DispatchQueue.main.async {
+            Actito.shared.userInbox().remove(item) { result in
+                switch result {
+                case .success:
+                    let result = CDVPluginResult(status: .ok)
+                    self.commandDelegate!.send(result, callbackId: command.callbackId)
+                case let .failure(error):
+                    let result = CDVPluginResult(status: .error, messageAs: error.localizedDescription)
+                    self.commandDelegate!.send(result, callbackId: command.callbackId)
+                }
             }
         }
     }
