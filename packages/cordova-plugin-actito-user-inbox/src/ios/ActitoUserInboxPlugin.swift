@@ -32,6 +32,7 @@ class ActitoUserInboxPlugin : CDVPlugin {
         }
     }
 
+    @MainActor
     @objc func open(_ command: CDVInvokedUrlCommand) {
         let item: ActitoUserInboxItem
 
@@ -45,27 +46,26 @@ class ActitoUserInboxPlugin : CDVPlugin {
             return
         }
 
-        DispatchQueue.main.async {
-            Actito.shared.userInbox().open(item) { result in
-                switch result {
-                case let .success(notification):
-                    do {
-                        let json = try notification.toJson()
+        Actito.shared.userInbox().open(item) { result in
+            switch result {
+            case let .success(notification):
+                do {
+                    let json = try notification.toJson()
 
-                        let result = CDVPluginResult(status: .ok, messageAs: json)
-                        self.commandDelegate!.send(result, callbackId: command.callbackId)
-                    } catch {
-                        let result = CDVPluginResult(status: .error, messageAs: error.localizedDescription)
-                        self.commandDelegate!.send(result, callbackId: command.callbackId)
-                    }
-                case let .failure(error):
+                    let result = CDVPluginResult(status: .ok, messageAs: json)
+                    self.commandDelegate!.send(result, callbackId: command.callbackId)
+                } catch {
                     let result = CDVPluginResult(status: .error, messageAs: error.localizedDescription)
                     self.commandDelegate!.send(result, callbackId: command.callbackId)
                 }
+            case let .failure(error):
+                let result = CDVPluginResult(status: .error, messageAs: error.localizedDescription)
+                self.commandDelegate!.send(result, callbackId: command.callbackId)
             }
         }
     }
 
+    @MainActor
     @objc func markAsRead(_ command: CDVInvokedUrlCommand) {
         let item: ActitoUserInboxItem
 
@@ -79,20 +79,19 @@ class ActitoUserInboxPlugin : CDVPlugin {
             return
         }
 
-        DispatchQueue.main.async {
-            Actito.shared.userInbox().markAsRead(item) { result in
-                switch result {
-                case .success:
-                    let result = CDVPluginResult(status: .ok)
-                    self.commandDelegate!.send(result, callbackId: command.callbackId)
-                case let .failure(error):
-                    let result = CDVPluginResult(status: .error, messageAs: error.localizedDescription)
-                    self.commandDelegate!.send(result, callbackId: command.callbackId)
-                }
+        Actito.shared.userInbox().markAsRead(item) { result in
+            switch result {
+            case .success:
+                let result = CDVPluginResult(status: .ok)
+                self.commandDelegate!.send(result, callbackId: command.callbackId)
+            case let .failure(error):
+                let result = CDVPluginResult(status: .error, messageAs: error.localizedDescription)
+                self.commandDelegate!.send(result, callbackId: command.callbackId)
             }
         }
     }
 
+    @MainActor
     @objc func remove(_ command: CDVInvokedUrlCommand) {
         let item: ActitoUserInboxItem
 
@@ -106,16 +105,14 @@ class ActitoUserInboxPlugin : CDVPlugin {
             return
         }
 
-        DispatchQueue.main.async {
-            Actito.shared.userInbox().remove(item) { result in
-                switch result {
-                case .success:
-                    let result = CDVPluginResult(status: .ok)
-                    self.commandDelegate!.send(result, callbackId: command.callbackId)
-                case let .failure(error):
-                    let result = CDVPluginResult(status: .error, messageAs: error.localizedDescription)
-                    self.commandDelegate!.send(result, callbackId: command.callbackId)
-                }
+        Actito.shared.userInbox().remove(item) { result in
+            switch result {
+            case .success:
+                let result = CDVPluginResult(status: .ok)
+                self.commandDelegate!.send(result, callbackId: command.callbackId)
+            case let .failure(error):
+                let result = CDVPluginResult(status: .error, messageAs: error.localizedDescription)
+                self.commandDelegate!.send(result, callbackId: command.callbackId)
             }
         }
     }
