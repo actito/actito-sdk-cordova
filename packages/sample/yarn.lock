@@ -161,7 +161,7 @@ cordova-common@^5.0.0, cordova-common@^5.0.1:
     read-chunk "^3.2.0"
     strip-bom "^4.0.0"
 
-cordova-ios@^7.0.1:
+cordova-ios@^7.1.1:
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/cordova-ios/-/cordova-ios-7.1.1.tgz#31b2339a63ebca8d1a5846d4a8a61ca30f70856c"
   integrity sha512-JwTyPxWcAZlbIOR5QO6TaJzkoSzfrp7jrlX01bWZ7Sxp0PYXejAJbA6J0W4u11M+atrQRNimNltZDyAlSBW2tw==
