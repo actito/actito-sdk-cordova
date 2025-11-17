@@ -129,11 +129,11 @@ Here is an example from the inbox implementation:
 If your project overrides SDK-provided localizable strings or other resources, you must update their names to align with the new Actito namespace.
 All resource identifiers previously prefixed with `notificare_` should now use the `actito_` prefix instead.
 
-For example, in your `res/values/strings.xml` file:
+For example, in your `res/values-fr/strings.xml` file:
 
 ```diff
-- <string name="notificare_default_channel_name">Notifications</string>
-+ <string name="actito_default_channel_name">Notifications</string>
+- <string name="notificare_dialog_cancel_button">Annuler</string>
++ <string name="actito_dialog_cancel_button">Annuler</string>
 ```
 
 Ensure this change is applied consistently across all localized resource files (for example, values-es, values-fr, etc.) within your res directory.
