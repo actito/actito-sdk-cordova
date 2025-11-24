@@ -1,6 +1,7 @@
 import ActitoKit
 import ActitoInAppMessagingKit
 
+@MainActor
 @objc(ActitoInAppMessagingPlugin)
 class ActitoInAppMessagingPlugin : CDVPlugin {
 

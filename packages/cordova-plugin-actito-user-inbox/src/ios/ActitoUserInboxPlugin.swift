@@ -32,6 +32,7 @@ class ActitoUserInboxPlugin : CDVPlugin {
         }
     }
 
+    @MainActor
     @objc func open(_ command: CDVInvokedUrlCommand) {
         let item: ActitoUserInboxItem
 
@@ -64,6 +65,7 @@ class ActitoUserInboxPlugin : CDVPlugin {
         }
     }
 
+    @MainActor
     @objc func markAsRead(_ command: CDVInvokedUrlCommand) {
         let item: ActitoUserInboxItem
 
@@ -89,6 +91,7 @@ class ActitoUserInboxPlugin : CDVPlugin {
         }
     }
 
+    @MainActor
     @objc func remove(_ command: CDVInvokedUrlCommand) {
         let item: ActitoUserInboxItem
 

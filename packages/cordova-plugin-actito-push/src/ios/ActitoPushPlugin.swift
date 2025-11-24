@@ -1,6 +1,7 @@
 import ActitoKit
 import ActitoPushKit
 
+@MainActor
 @objc(ActitoPushPlugin)
 class ActitoPushPlugin : CDVPlugin {
 
@@ -388,7 +389,7 @@ extension ActitoPushPlugin: ActitoPushDelegate {
         )
     }
 
-    func actito(_ actitoPush: any ActitoPush, didChangeSubscription subscription: ActitoPushSubscription?) {
+    func actito(_ actitoPush: ActitoPush, didChangeSubscription subscription: ActitoPushSubscription?) {
         do {
             ActitoPushPluginEventBroker.dispatchEvent(
                 name: "subscription_changed",

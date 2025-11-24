@@ -1,6 +1,7 @@
 import ActitoKit
 import ActitoAssetsKit
 
+@MainActor
 @objc(ActitoAssetsPlugin)
 class ActitoAssetsPlugin : CDVPlugin {
 

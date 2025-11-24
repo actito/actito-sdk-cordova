@@ -1,6 +1,7 @@
 import ActitoKit
 import ActitoLoyaltyKit
 
+@MainActor
 @objc(ActitoLoyaltyPlugin)
 class ActitoLoyaltyPlugin : CDVPlugin {
 

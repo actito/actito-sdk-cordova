@@ -1,13 +1,12 @@
 import Foundation
 import ActitoUtilitiesKit
 
-internal var logger: ActitoLogger = {
+internal let logger: ActitoLogger = {
     var logger = ActitoLogger(
         subsystem: "com.actito.cordova",
-        category: "ActitoCordova"
+        category: "ActitoCordova",
+        labelIgnoreList: ["ActitoCordova"]
     )
-
-    logger.labelIgnoreList.append("ActitoCordova")
 
     return logger
 }()

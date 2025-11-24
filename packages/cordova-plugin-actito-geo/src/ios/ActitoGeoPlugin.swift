@@ -4,6 +4,7 @@ import ActitoGeoKit
 
 fileprivate let REQUESTED_LOCATION_ALWAYS_KEY = "com.actito.geo.cordova.requested_location_always"
 
+@MainActor
 @objc(ActitoGeoPlugin)
 class ActitoGeoPlugin : CDVPlugin {
     private var locationManager: CLLocationManager!

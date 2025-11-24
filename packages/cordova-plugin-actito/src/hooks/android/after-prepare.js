@@ -5,7 +5,7 @@ const path = require('path');
 const utils = require('../utils');
 const { isPreferenceSet, isPreferenceOptedIn } = require('../utils');
 
-const ACTITO_SERVICES_GRADLE_PLUGIN_VERSION = '1.1.0';
+const ACTITO_SERVICES_GRADLE_PLUGIN_VERSION = '1.0.0';
 
 module.exports = function (context) {
   // Make sure android platform is part of build
@@ -34,7 +34,7 @@ function updateRootGradleActitoPlugin(context) {
     pluginVersionPreference = appConfig.getPlatformPreference('ActitoServicesGradlePluginVersion', 'android');
   }
 
-  const pluginDependency = 're.notifica.gradle:notificare-services';
+  const pluginDependency = 'com.actito.gradle:actito-services';
   const pluginVersion = pluginVersionPreference ?? ACTITO_SERVICES_GRADLE_PLUGIN_VERSION;
   const pluginRegex = new RegExp(`(^\\s*classpath\\s*\\(?\\s*["']${pluginDependency}:)([^"']+)(["'].*$)`, 'm');
   const plugin = `classpath "${pluginDependency}:${pluginVersion}"`;
@@ -72,7 +72,7 @@ function updateRootGradleActitoPlugin(context) {
 
 function applyAppGradleActitoPlugin(context) {
   const appGradlePath = path.join(context.opts.projectRoot, 'platforms/android/app/build.gradle');
-  const plugin = "apply plugin: 're.notifica.gradle.notificare-services'";
+  const plugin = "apply plugin: 'com.actito.gradle.actito-services'";
 
   let gradle = fs.readFileSync(appGradlePath, 'utf8');
 

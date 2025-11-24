@@ -18,7 +18,7 @@
             <preference name="AndroidXEnabled" value="true" />
 
             <preference name="GradlePluginKotlinEnabled" value="true" />
-            <preference name="GradlePluginKotlinVersion" value="1.9.10" />
+            <preference name="GradlePluginKotlinVersion" value="2.1.20" />
 
             <preference name="GradlePluginGoogleServicesEnabled" value="true" />
             <preference name="GradlePluginGoogleServicesVersion" value="4.3.14" />
@@ -61,7 +61,7 @@
                 <source url="https://github.com/CocoaPods/Specs.git" />
             </config>
             <pods use-frameworks="true">
-                <pod name="Actito/ActitoInAppMessagingKit" spec="5.0.0-canary.1" />
+                <pod name="Actito/ActitoInAppMessagingKit" spec="5.0.0-beta.1" />
             </pods>
         </podspec>
     </platform>

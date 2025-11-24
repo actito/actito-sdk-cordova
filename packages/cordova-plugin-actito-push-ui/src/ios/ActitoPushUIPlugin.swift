@@ -1,6 +1,7 @@
 import ActitoKit
 import ActitoPushUIKit
 
+@MainActor
 @objc(ActitoPushUIPlugin)
 class ActitoPushUIPlugin : CDVPlugin {
 
