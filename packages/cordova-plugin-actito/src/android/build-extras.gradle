@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    def actito_version = '5.0.0-beta.1'
+    def actito_version = '5.0.0-beta.2'
     implementation "com.actito:actito:$actito_version"
     implementation "com.actito:actito-utilities:$actito_version"
 }

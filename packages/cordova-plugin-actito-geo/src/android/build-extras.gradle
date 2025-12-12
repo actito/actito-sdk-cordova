@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    def actito_version = '5.0.0-beta.1'
+    def actito_version = '5.0.0-beta.2'
     api "com.actito:actito:$actito_version"
     api "com.actito:actito-geo:$actito_version"
 

@@ -55,7 +55,7 @@
                 <source url="https://github.com/CocoaPods/Specs.git" />
             </config>
             <pods use-frameworks="true">
-                <pod name="Actito/ActitoAssetsKit" spec="5.0.0-beta.1" />
+                <pod name="Actito/ActitoAssetsKit" spec="5.0.0-beta.2" />
             </pods>
         </podspec>
     </platform>
