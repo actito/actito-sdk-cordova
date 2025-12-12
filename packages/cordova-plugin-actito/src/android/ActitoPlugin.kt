@@ -7,8 +7,6 @@ import com.actito.ActitoCallback
 import com.actito.ActitoEventData
 import com.actito.ActitoIntentReceiver
 import com.actito.internal.ktx.toEventData
-import com.actito.ktx.device
-import com.actito.ktx.events
 import com.actito.models.ActitoApplication
 import com.actito.models.ActitoDoNotDisturb
 import com.actito.models.ActitoDynamicLink
