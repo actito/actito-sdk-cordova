@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin id="cordova-plugin-actito-push-ui"
+        version="5.0.0-beta.2"
+        xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <name>Actito Push UI</name>
+
+    <js-module name="ActitoPushUI" src="build/actito-push-ui.bundle.js">
+        <clobbers target="ActitoPushUI" />
+        <merges target="cordova.plugins.ActitoPushUI" />
+    </js-module>
+
+    <asset src="build/actito-push-ui.bundle.js.map" target="plugins/cordova-plugin-actito-push-ui/build/actito-push-ui.bundle.js.map" />
+
+    <platform name="android">
+        <config-file target="config.xml" parent="/*">
+            <preference name="AndroidXEnabled" value="true" />
+
+            <preference name="GradlePluginKotlinEnabled" value="true" />
+            <preference name="GradlePluginKotlinVersion" value="2.1.20" />
+        </config-file>
+
+        <config-file target="res/xml/config.xml" parent="/widget">
+            <feature name="ActitoPushUI">
+                <param name="android-package" value="com.actito.push.ui.cordova.ActitoPushUIPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="ActitoPushUI">
+                <param name="android-package" value="com.actito.push.ui.cordova.ActitoPushUIPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity
+                    android:name="com.actito.push.ui.NotificationActivity"
+                    android:exported="false"
+                    android:hardwareAccelerated="true"
+                    android:theme="@style/Theme.Actito.Cordova.Translucent" />
+        </config-file>
+
+        <source-file src="src/android/ActitoPushUIPlugin.kt" target-dir="app/src/main/kotlin/com/actito/push/ui/cordova" />
+        <source-file src="src/android/ActitoPushUIPluginEventBroker.kt" target-dir="app/src/main/kotlin/com/actito/push/ui/cordova" />
+        <source-file src="src/android/Logger.kt" target-dir="app/src/main/kotlin/com/actito/push/ui/cordova" />
+        <source-file src="src/android/actito_styles.xml" target-dir="/res/values" />
+
+        <framework custom="true" src="src/android/build-extras.gradle" type="gradleReference" />
+    </platform>
+
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="ActitoPushUI">
+                <param name="ios-package" value="ActitoPushUIPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <source-file src="src/ios/ActitoPushUIPlugin.swift" />
+        <source-file src="src/ios/ActitoPushUIPluginEventBroker.swift" />
+
+        <podspec>
+            <config>
+                <source url="https://github.com/CocoaPods/Specs.git" />
+            </config>
+            <pods use-frameworks="true">
+                <pod name="Actito/ActitoPushUIKit" spec="5.0.0-beta.2" />
+            </pods>
+        </podspec>
+    </platform>
+</plugin>

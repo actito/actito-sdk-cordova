@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../../../../css/home.css"/>
+</head>
+<body>
+<div class="card margin-top">
+    <div class="switch-row">
+        <span class="switch-label"> Do not disturb </span>
+
+        <label class="switch">
+            <input type="checkbox" id="dndCheckbox" onchange="updateDndStatus(this)"/>
+
+            <span class="slider round"></span>
+        </label>
+    </div>
+</div>
+<script src="../../../../cordova.js"></script>
+<script src="dnd-card.js"></script>
+</body>
+</html>

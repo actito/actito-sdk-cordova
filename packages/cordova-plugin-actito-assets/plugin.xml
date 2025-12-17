@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin id="cordova-plugin-actito-assets"
+        version="5.0.0-beta.2"
+        xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <name>Actito Assets</name>
+
+    <js-module name="ActitoAssets" src="build/actito-assets.bundle.js">
+        <clobbers target="ActitoAssets" />
+        <merges target="cordova.plugins.ActitoAssets" />
+    </js-module>
+
+    <asset src="build/actito-assets.bundle.js.map" target="plugins/cordova-plugin-actito-assets/build/actito-assets.bundle.js.map" />
+
+    <platform name="android">
+        <config-file target="config.xml" parent="/*">
+            <preference name="AndroidXEnabled" value="true" />
+
+            <preference name="GradlePluginKotlinEnabled" value="true" />
+            <preference name="GradlePluginKotlinVersion" value="2.1.20" />
+        </config-file>
+
+        <config-file target="res/xml/config.xml" parent="/widget">
+            <feature name="ActitoAssets">
+                <param name="android-package" value="com.actito.assets.cordova.ActitoAssetsPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="ActitoAssets">
+                <param name="android-package" value="com.actito.assets.cordova.ActitoAssetsPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/ActitoAssetsPlugin.kt" target-dir="app/src/main/kotlin/com/actito/assets/cordova" />
+
+        <framework custom="true" src="src/android/build-extras.gradle" type="gradleReference" />
+    </platform>
+
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="ActitoAssets">
+                <param name="ios-package" value="ActitoAssetsPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <source-file src="src/ios/ActitoAssetsPlugin.swift" />
+
+        <podspec>
+            <config>
+                <source url="https://github.com/CocoaPods/Specs.git" />
+            </config>
+            <pods use-frameworks="true">
+                <pod name="Actito/ActitoAssetsKit" spec="5.0.0-beta.2" />
+            </pods>
+        </podspec>
+    </platform>
+</plugin>

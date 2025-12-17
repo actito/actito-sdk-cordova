@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../../../../css/home.css" />
+</head>
+<body>
+<div>
+    <div class="section-title-row">
+        <span class="section-title">Geo</span>
+
+        <span class="info-icon" onclick="showLocationInfo()"> ⓘ </span>
+    </div>
+
+    <div class="card">
+        <div class="switch-row">
+            <span class="switch-label"> Location </span>
+
+            <label class="switch">
+                <input type="checkbox" id="locationCheckbox" onchange="updateLocationStatus(this)" />
+
+                <span class="slider round"></span>
+            </label>
+        </div>
+
+        <div class="divider-horizontal"></div>
+
+        <button class="navigation-button" onclick="openBeacons()">
+            <span class="navigation-button-text"> Beacons </span>
+
+            <span class="arrow-right"></span>
+        </button>
+    </div>
+</div>
+<script src="../../../../cordova.js"></script>
+<script src="geo-card.js"></script>
+</body>
+</html>

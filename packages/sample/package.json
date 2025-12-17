@@ -1,0 +1,52 @@
+{
+  "name": "sample",
+  "private": "true",
+  "displayName": "Sample",
+  "version": "1.0.0",
+  "description": "A simplified fashion application to demonstrate Actito basic features.",
+  "main": "index.html",
+  "scripts": {
+    "android": "cordova run android",
+    "ios": "cordova run ios",
+    "cordova:refresh-plugins": "yarn cordova:remove-platforms && yarn cordova:add-android && yarn cordova:add-ios",
+    "cordova:remove-platforms": "rm -rf platforms plugins",
+    "cordova:add-android": "cordova platform add android",
+    "cordova:add-ios": "cordova platform add ios; cd platforms/ios; pod install"
+  },
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": "Actito",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "cordova-android": "^14.0.1",
+    "cordova-ios": "^7.1.1",
+    "cordova-plugin-dialogs": "^2.0.2",
+    "cordova-plugin-actito": "5.0.0-beta.2",
+    "cordova-plugin-actito-assets": "5.0.0-beta.2",
+    "cordova-plugin-actito-geo": "5.0.0-beta.2",
+    "cordova-plugin-actito-in-app-messaging": "5.0.0-beta.2",
+    "cordova-plugin-actito-inbox": "5.0.0-beta.2",
+    "cordova-plugin-actito-loyalty": "5.0.0-beta.2",
+    "cordova-plugin-actito-push": "5.0.0-beta.2",
+    "cordova-plugin-actito-push-ui": "5.0.0-beta.2",
+    "ios-deploy": "^1.12.2"
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-actito": {},
+      "cordova-plugin-actito-assets": {},
+      "cordova-plugin-actito-geo": {},
+      "cordova-plugin-actito-in-app-messaging": {},
+      "cordova-plugin-actito-inbox": {},
+      "cordova-plugin-actito-loyalty": {},
+      "cordova-plugin-actito-push": {},
+      "cordova-plugin-actito-push-ui": {},
+      "cordova-plugin-dialogs": {}
+    },
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  }
+}

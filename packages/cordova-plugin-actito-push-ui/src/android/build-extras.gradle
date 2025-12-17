@@ -1,0 +1,19 @@
+android {
+    kotlinOptions {
+        jvmTarget = cordovaConfig.KOTLIN_JVM_TARGET ?: '1.8'
+        freeCompilerArgs += [
+                '-Xopt-in=com.actito.InternalActitoApi',
+        ]
+    }
+}
+
+repositories {
+    google()
+    mavenCentral()
+}
+
+dependencies {
+    def actito_version = '5.0.0-beta.2'
+    api "com.actito:actito:$actito_version"
+    api "com.actito:actito-push-ui:$actito_version"
+}

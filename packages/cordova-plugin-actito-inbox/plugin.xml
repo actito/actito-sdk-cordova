@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin id="cordova-plugin-actito-inbox"
+        version="5.0.0-beta.2"
+        xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <name>Actito Inbox</name>
+
+    <js-module name="ActitoInbox" src="build/actito-inbox.bundle.js">
+        <clobbers target="ActitoInbox" />
+        <merges target="cordova.plugins.ActitoInbox" />
+    </js-module>
+
+    <asset src="build/actito-inbox.bundle.js.map" target="plugins/cordova-plugin-actito-inbox/build/actito-inbox.bundle.js.map" />
+
+    <platform name="android">
+        <config-file target="config.xml" parent="/*">
+            <preference name="AndroidXEnabled" value="true" />
+
+            <preference name="GradlePluginKotlinEnabled" value="true" />
+            <preference name="GradlePluginKotlinVersion" value="2.1.20" />
+        </config-file>
+
+        <config-file target="res/xml/config.xml" parent="/widget">
+            <feature name="ActitoInbox">
+                <param name="android-package" value="com.actito.inbox.cordova.ActitoInboxPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="ActitoInbox">
+                <param name="android-package" value="com.actito.inbox.cordova.ActitoInboxPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/ActitoInboxPlugin.kt" target-dir="app/src/main/kotlin/com/actito/inbox/cordova" />
+        <source-file src="src/android/ActitoInboxPluginEventBroker.kt" target-dir="app/src/main/kotlin/com/actito/inbox/cordova" />
+        <source-file src="src/android/Logger.kt" target-dir="app/src/main/kotlin/com/actito/inbox/cordova" />
+
+        <framework custom="true" src="src/android/build-extras.gradle" type="gradleReference" />
+    </platform>
+
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="ActitoInbox">
+                <param name="ios-package" value="ActitoInboxPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <source-file src="src/ios/ActitoInboxPlugin.swift" />
+        <source-file src="src/ios/ActitoInboxPluginEventBroker.swift" />
+
+        <podspec>
+            <config>
+                <source url="https://github.com/CocoaPods/Specs.git" />
+            </config>
+            <pods use-frameworks="true">
+                <pod name="Actito/ActitoInboxKit" spec="5.0.0-beta.2" />
+            </pods>
+        </podspec>
+    </platform>
+</plugin>

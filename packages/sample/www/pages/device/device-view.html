@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'unsafe-inline' 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src 'self'; img-src * data: content:;" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover" />
+    <link rel="stylesheet" href="../../css/home.css" />
+    <link rel="shortcut icon" href="../../res/favicon.ico" />
+    <title>Device</title>
+</head>
+<body>
+<div class="app">
+    <div class="section-title-row">
+        <span class="section-title"> Current Device </span>
+    </div>
+
+    <div id="deviceData" class="card"></div>
+
+    <div class="section-title-row">
+        <span class="section-title"> User Data </span>
+    </div>
+
+    <div id="userData" class="card"></div>
+
+    <div class="section-title-row">
+        <span class="section-title"> Register Device </span>
+    </div>
+
+    <div class="card">
+        <button onclick="{updateUser()}">Update User</button>
+
+        <div class="divider-horizontal"></div>
+
+        <button onclick="{updateUserAsAnonymous()}">Update User as Anonymous</button>
+    </div>
+
+    <div class="section-title-row">
+        <span class="section-title"> Language </span>
+    </div>
+
+    <div class="card">
+        <button onclick="{updatePreferredLanguage()}">Update preferred language</button>
+
+        <div class="divider-horizontal"></div>
+
+        <button onclick="{clearPreferredLanguage()}">Clear preferred language</button>
+    </div>
+
+    <div class="section-title-row">
+        <span class="section-title"> User Data </span>
+    </div>
+
+    <div class="card">
+        <button onclick="{updateUserData()}">Update user data</button>
+
+        <div class="divider-horizontal"></div>
+
+        <button onclick="{resetUserData()}">Reset user data</button>
+    </div>
+
+    <div onclick="handleBackButton()" class="back-button">
+        <div class="arrow arrow-left"></div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+</div>
+<script src="../../cordova.js"></script>
+<script src="../../toast/toast.js"></script>
+<script src="../../events/event-monitor.js"></script>
+<script src="device.js"></script>
+</body>
+</html>
