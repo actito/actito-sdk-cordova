@@ -40,6 +40,10 @@ function setupListeners() {
     await ActitoPushUI.presentNotification(notification);
   });
 
+  ActitoPush.onNotificationActionOpened(async (notification, action) => {
+    await ActitoPushUI.presentAction(notification, action);
+  });
+
   ActitoPush.onUnknownNotificationOpened((notification) => {
     console.log(`---> Opened unknown notification = ${JSON.stringify(notification)}`);
   });

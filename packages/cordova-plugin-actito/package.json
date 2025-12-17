@@ -2,7 +2,7 @@
   "name": "cordova-plugin-actito",
   "version": "5.0.0-canary.1",
   "description": "Actito Cordova Plugin.",
-  "author": "Actito <product@actito.com> (https://actito.com)",
+  "author": "Actito <mobile@actito.com> (https://actito.com)",
   "license": "MIT",
   "homepage": "https://github.com/actito/actito-sdk-cordova#readme",
   "repository": {
