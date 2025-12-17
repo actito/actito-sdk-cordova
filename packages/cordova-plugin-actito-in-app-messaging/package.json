@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-actito-in-app-messaging",
-  "version": "5.0.0-canary.1",
+  "version": "5.0.0-beta.2",
   "description": "Actito In-App Messaging Cordova Plugin.",
   "author": "Actito <mobile@actito.com> (https://actito.com)",
   "license": "MIT",
@@ -40,10 +40,10 @@
     "docs:replace-symbolic-links": "rm README.md CHANGELOG.md MIGRATION.md; cp ../../README.md ../../CHANGELOG.md ../../MIGRATION.md ."
   },
   "peerDependencies": {
-    "cordova-plugin-actito": "5.0.0-canary.1"
+    "cordova-plugin-actito": "5.0.0-beta.2"
   },
   "devDependencies": {
-    "cordova-plugin-actito": "5.0.0-canary.1"
+    "cordova-plugin-actito": "5.0.0-beta.2"
   },
   "cordova": {
     "id": "cordova-plugin-actito-in-app-messaging",
