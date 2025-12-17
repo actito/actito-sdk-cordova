@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Upcoming release
+## 5.0.0-beta.2
 
 - Added name and size restrictions to tag names, event names and event payloads
 - Crash reporting is deprecated and disabled by default. We recommend using another solution to collect crash analytics
