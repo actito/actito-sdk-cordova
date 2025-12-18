@@ -7,7 +7,7 @@ class ActitoLoyaltyPlugin : CDVPlugin {
 
     private var rootViewController: UIViewController? {
         get {
-            UIApplication.shared.delegate?.window??.rootViewController
+            viewController.view.window?.rootViewController
         }
     }
 
