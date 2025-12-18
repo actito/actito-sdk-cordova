@@ -4,10 +4,9 @@ import ActitoPushUIKit
 @MainActor
 @objc(ActitoPushUIPlugin)
 class ActitoPushUIPlugin : CDVPlugin {
-
     private var rootViewController: UIViewController? {
         get {
-            UIApplication.shared.delegate?.window??.rootViewController
+            viewController.view.window?.rootViewController
         }
     }
 
