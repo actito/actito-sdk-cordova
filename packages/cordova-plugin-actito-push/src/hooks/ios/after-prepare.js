@@ -13,5 +13,5 @@ module.exports = function (context) {
   }
 
   setupServiceExtension(context, appConfig);
-  setupPlistSettings(appConfig);
+  setupPlistSettings(context, appConfig);
 };
