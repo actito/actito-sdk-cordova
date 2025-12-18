@@ -29,7 +29,7 @@ class ActitoGeoPlugin : CDVPlugin {
     }
 
     @objc func registerListener(_ command: CDVInvokedUrlCommand) {
-        ActitoGeoPluginEventBroker.startListening(settings: commandDelegate.settings) { event in
+        ActitoGeoPluginEventBroker.startListening(settings: commandDelegate.settings as? [AnyHashable: Any]) { event in
             var payload: [String: Any] = [
                 "name": event.name,
             ]
@@ -39,7 +39,7 @@ class ActitoGeoPlugin : CDVPlugin {
             }
 
             let result = CDVPluginResult(status: .ok, messageAs: payload)
-            result!.keepCallback = true
+            result.keepCallback = true
 
             self.commandDelegate!.send(result, callbackId: command.callbackId)
         }

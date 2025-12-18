@@ -12,7 +12,7 @@ class ActitoPushPlugin : CDVPlugin {
     }
 
     @objc func registerListener(_ command: CDVInvokedUrlCommand) {
-        ActitoPushPluginEventBroker.startListening(settings: commandDelegate.settings) { event in
+        ActitoPushPluginEventBroker.startListening(settings: commandDelegate.settings as? [AnyHashable: Any]) { event in
             var payload: [String: Any] = [
                 "name": event.name,
             ]
@@ -22,7 +22,7 @@ class ActitoPushPlugin : CDVPlugin {
             }
 
             let result = CDVPluginResult(status: .ok, messageAs: payload)
-            result!.keepCallback = true
+            result.keepCallback = true
 
             self.commandDelegate!.send(result, callbackId: command.callbackId)
         }
@@ -157,7 +157,14 @@ class ActitoPushPlugin : CDVPlugin {
     }
 
     @objc func getTransport(_ command: CDVInvokedUrlCommand) {
-        let result = CDVPluginResult(status: .ok, messageAs: Actito.shared.push().transport?.rawValue)
+        let transport = Actito.shared.push().transport?.rawValue
+
+        let result = if let transport {
+            CDVPluginResult(status: .ok, messageAs: transport)
+        } else {
+            CDVPluginResult(status: .ok)
+        }
+
         self.commandDelegate!.send(result, callbackId: command.callbackId)
     }
 
@@ -165,7 +172,12 @@ class ActitoPushPlugin : CDVPlugin {
         do {
             let json = try Actito.shared.push().subscription?.toJson()
 
-            let result = CDVPluginResult(status: .ok, messageAs: json)
+            let result = if let json {
+                CDVPluginResult(status: .ok, messageAs: json)
+            } else {
+                CDVPluginResult(status: .ok)
+            }
+
             self.commandDelegate!.send(result, callbackId: command.callbackId)
         } catch {
             let result = CDVPluginResult(status: .error, messageAs: error.localizedDescription)

@@ -12,7 +12,7 @@ class ActitoInAppMessagingPlugin : CDVPlugin {
     }
 
     @objc func registerListener(_ command: CDVInvokedUrlCommand) {
-        ActitoInAppMessagingPluginEventBroker.startListening(settings: commandDelegate.settings) { event in
+        ActitoInAppMessagingPluginEventBroker.startListening(settings: commandDelegate.settings as? [AnyHashable: Any]) { event in
             var payload: [String: Any] = [
                 "name": event.name,
             ]
@@ -22,7 +22,7 @@ class ActitoInAppMessagingPlugin : CDVPlugin {
             }
 
             let result = CDVPluginResult(status: .ok, messageAs: payload)
-            result!.keepCallback = true
+            result.keepCallback = true
 
             self.commandDelegate!.send(result, callbackId: command.callbackId)
         }

@@ -18,7 +18,7 @@ class ActitoPushUIPlugin : CDVPlugin {
     }
 
     @objc func registerListener(_ command: CDVInvokedUrlCommand) {
-        ActitoPushUIPluginEventBroker.startListening(settings: commandDelegate.settings) { event in
+        ActitoPushUIPluginEventBroker.startListening(settings: commandDelegate.settings as? [AnyHashable: Any]) { event in
             var payload: [String: Any] = [
                 "name": event.name,
             ]
@@ -28,7 +28,7 @@ class ActitoPushUIPlugin : CDVPlugin {
             }
 
             let result = CDVPluginResult(status: .ok, messageAs: payload)
-            result!.keepCallback = true
+            result.keepCallback = true
 
             self.commandDelegate!.send(result, callbackId: command.callbackId)
         }
@@ -115,14 +115,6 @@ class ActitoPushUIPlugin : CDVPlugin {
         }
 
         return navigationController
-    }
-
-    @objc private func onCloseClicked() {
-        guard let rootViewController = UIApplication.shared.keyWindow?.rootViewController else {
-            return
-        }
-
-        rootViewController.dismiss(animated: true, completion: nil)
     }
 }
 

@@ -13,7 +13,7 @@ class ActitoPlugin : CDVPlugin {
         _ = ActitoSwizzler.addInterceptor(self)
     }
 
-    override func handleOpenURL(_ notification: Notification!) {
+    override func handleOpenURL(_ notification: Notification) {
         guard let url = notification.object as? URL else {
             return
         }
@@ -33,7 +33,7 @@ class ActitoPlugin : CDVPlugin {
     }
 
     @objc func registerListener(_ command: CDVInvokedUrlCommand) {
-        ActitoPluginEventBroker.startListening(settings: commandDelegate.settings) { event in
+        ActitoPluginEventBroker.startListening(settings: commandDelegate.settings as? [AnyHashable: Any]) { event in
             var payload: [String: Any] = [
                 "name": event.name,
             ]
@@ -43,7 +43,7 @@ class ActitoPlugin : CDVPlugin {
             }
 
             let result = CDVPluginResult(status: .ok, messageAs: payload)
-            result!.keepCallback = true
+            result.keepCallback = true
 
             self.commandDelegate!.send(result, callbackId: command.callbackId)
         }
@@ -92,7 +92,12 @@ class ActitoPlugin : CDVPlugin {
         do {
             let json = try Actito.shared.application?.toJson()
 
-            let result = CDVPluginResult(status: .ok, messageAs: json)
+            let result = if let json {
+                CDVPluginResult(status: .ok, messageAs: json)
+            } else {
+                CDVPluginResult(status: .ok)
+            }
+
             self.commandDelegate!.send(result, callbackId: command.callbackId)
         } catch {
             let result = CDVPluginResult(status: .error, messageAs: error.localizedDescription)
@@ -191,7 +196,12 @@ class ActitoPlugin : CDVPlugin {
         do {
             let json = try Actito.shared.device().currentDevice?.toJson()
 
-            let result = CDVPluginResult(status: .ok, messageAs: json)
+            let result = if let json {
+                CDVPluginResult(status: .ok, messageAs: json)
+            } else {
+                CDVPluginResult(status: .ok)
+            }
+
             self.commandDelegate!.send(result, callbackId: command.callbackId)
         } catch {
             let result = CDVPluginResult(status: .error, messageAs: error.localizedDescription)
@@ -318,7 +328,14 @@ class ActitoPlugin : CDVPlugin {
     }
 
     @objc func getPreferredLanguage(_ command: CDVInvokedUrlCommand) {
-        let result = CDVPluginResult(status: .ok, messageAs: Actito.shared.device().preferredLanguage)
+        let preferredLanguage = Actito.shared.device().preferredLanguage
+
+        let result = if let preferredLanguage {
+            CDVPluginResult(status: .ok, messageAs: preferredLanguage)
+        } else {
+            CDVPluginResult(status: .ok)
+        }
+
         self.commandDelegate!.send(result, callbackId: command.callbackId)
     }
 
@@ -344,7 +361,12 @@ class ActitoPlugin : CDVPlugin {
                 do {
                     let json = try dnd?.toJson()
 
-                    let result = CDVPluginResult(status: .ok, messageAs: json)
+                    let result = if let json {
+                        CDVPluginResult(status: .ok, messageAs: json)
+                    } else {
+                        CDVPluginResult(status: .ok)
+                    }
+
                     self.commandDelegate!.send(result, callbackId: command.callbackId)
                 } catch {
                     let result = CDVPluginResult(status: .error, messageAs: error.localizedDescription)
