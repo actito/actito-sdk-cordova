@@ -38,7 +38,7 @@ class ActitoGeoPlugin : CDVPlugin {
                 payload["data"] = data
             }
 
-            let result = CDVPluginResult(status: .ok, messageAs: payload)
+            let result: CDVPluginResult = CDVPluginResult(status: .ok, messageAs: payload)
             result.keepCallback = true
 
             self.commandDelegate!.send(result, callbackId: command.callbackId)
