@@ -20,7 +20,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "cordova-android": "^14.0.1",
-    "cordova-ios": "^7.1.1",
+    "cordova-ios": "^8.0.0",
     "cordova-plugin-dialogs": "^2.0.2",
     "cordova-plugin-actito": "5.0.0-beta.2",
     "cordova-plugin-actito-assets": "5.0.0-beta.2",
