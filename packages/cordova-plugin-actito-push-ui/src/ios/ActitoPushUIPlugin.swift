@@ -6,7 +6,7 @@ import ActitoPushUIKit
 class ActitoPushUIPlugin : CDVPlugin {
     private var rootViewController: UIViewController? {
         get {
-            viewController.view.window?.rootViewController
+            self.viewController.view.window?.rootViewController
         }
     }
 
