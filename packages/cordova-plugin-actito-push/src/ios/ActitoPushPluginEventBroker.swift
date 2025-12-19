@@ -9,9 +9,7 @@ class ActitoPushPluginEventBroker {
     private static var canEmitEvents = false
 
     @MainActor
-    static func startListening(settings: [AnyHashable : Any]?, _ consumer: @escaping Consumer) {
-        let holdEventsUntilReady = settings?["com.actito.cordova.hold_events_until_ready"] as? String == "true"
-
+    static func startListening(holdEventsUntilReady: Bool, _ consumer: @escaping Consumer) {
         self.consumer = consumer
         canEmitEvents = !holdEventsUntilReady || Actito.shared.isReady
 

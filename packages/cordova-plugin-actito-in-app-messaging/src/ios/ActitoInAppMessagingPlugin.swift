@@ -12,7 +12,9 @@ class ActitoInAppMessagingPlugin : CDVPlugin {
     }
 
     @objc func registerListener(_ command: CDVInvokedUrlCommand) {
-        ActitoInAppMessagingPluginEventBroker.startListening(settings: commandDelegate.settings as? [AnyHashable: Any]) { event in
+        let holdEventsUntilReady = self.commandDelegate.settings["com.actito.cordova.hold_events_until_ready"] as? String == "true"
+
+        ActitoInAppMessagingPluginEventBroker.startListening(holdEventsUntilReady: holdEventsUntilReady) { event in
             var payload: [String: Any] = [
                 "name": event.name,
             ]
