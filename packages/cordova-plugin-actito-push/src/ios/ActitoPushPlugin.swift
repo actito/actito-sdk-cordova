@@ -1,6 +1,10 @@
 import ActitoKit
 import ActitoPushKit
 
+#if canImport(Cordova)
+import Cordova
+#endif
+
 @MainActor
 @objc(ActitoPushPlugin)
 class ActitoPushPlugin : CDVPlugin {
@@ -8,6 +12,7 @@ class ActitoPushPlugin : CDVPlugin {
     override func pluginInitialize() {
         super.pluginInitialize()
 
+        loggerPush.hasDebugLoggingEnabled = Actito.shared.options?.debugLoggingEnabled ?? false
         Actito.shared.push().delegate = self
     }
 
@@ -310,7 +315,7 @@ extension ActitoPushPlugin: ActitoPushDelegate {
                 payload: payload
             )
         } catch {
-            logger.error("Failed to emit the notification_info_received event.", error: error)
+            loggerPush.error("Failed to emit the notification_info_received event.", error: error)
         }
     }
 
@@ -321,7 +326,7 @@ extension ActitoPushPlugin: ActitoPushDelegate {
                 payload: try notification.toJson()
             )
         } catch {
-            logger.error("Failed to emit the system_notification_received event.", error: error)
+            loggerPush.error("Failed to emit the system_notification_received event.", error: error)
         }
     }
 
@@ -339,7 +344,7 @@ extension ActitoPushPlugin: ActitoPushDelegate {
                 payload: try notification.toJson()
             )
         } catch {
-            logger.error("Failed to emit the notification_opened event.", error: error)
+            loggerPush.error("Failed to emit the notification_opened event.", error: error)
         }
     }
 
@@ -370,7 +375,7 @@ extension ActitoPushPlugin: ActitoPushDelegate {
                 payload: payload
             )
         } catch {
-            logger.error("Failed to emit the notification_action_opened event.", error: error)
+            loggerPush.error("Failed to emit the notification_action_opened event.", error: error)
         }
     }
 
@@ -412,7 +417,7 @@ extension ActitoPushPlugin: ActitoPushDelegate {
                 payload: try subscription?.toJson()
             )
         } catch {
-            logger.error("Failed to emit the subscription_changed event.", error: error)
+            loggerPush.error("Failed to emit the subscription_changed event.", error: error)
         }
     }
 
@@ -423,7 +428,7 @@ extension ActitoPushPlugin: ActitoPushDelegate {
                 payload: try notification?.toJson()
             )
         } catch {
-            logger.error("Failed to emit the should_open_notification_settings event.", error: error)
+            loggerPush.error("Failed to emit the should_open_notification_settings event.", error: error)
         }
     }
 

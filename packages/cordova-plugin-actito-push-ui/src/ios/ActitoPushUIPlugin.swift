@@ -1,6 +1,10 @@
 import ActitoKit
 import ActitoPushUIKit
 
+#if canImport(Cordova)
+import Cordova
+#endif
+
 @MainActor
 @objc(ActitoPushUIPlugin)
 class ActitoPushUIPlugin : CDVPlugin {
@@ -13,6 +17,7 @@ class ActitoPushUIPlugin : CDVPlugin {
     override func pluginInitialize() {
         super.pluginInitialize()
 
+        loggerPushUI.hasDebugLoggingEnabled = Actito.shared.options?.debugLoggingEnabled ?? false
         Actito.shared.pushUI().delegate = self
     }
 
@@ -127,7 +132,7 @@ extension ActitoPushUIPlugin: ActitoPushUIDelegate {
                 payload: try notification.toJson()
             )
         } catch {
-            logger.error("Failed to emit the notification_will_present event.", error: error)
+            loggerPushUI.error("Failed to emit the notification_will_present event.", error: error)
         }
     }
 
@@ -138,7 +143,7 @@ extension ActitoPushUIPlugin: ActitoPushUIDelegate {
                 payload: try notification.toJson()
             )
         } catch {
-            logger.error("Failed to emit the notification_presented event.", error: error)
+            loggerPushUI.error("Failed to emit the notification_presented event.", error: error)
         }
     }
 
@@ -149,7 +154,7 @@ extension ActitoPushUIPlugin: ActitoPushUIDelegate {
                 payload: try notification.toJson()
             )
         } catch {
-            logger.error("Failed to emit the notification_finished_presenting event.", error: error)
+            loggerPushUI.error("Failed to emit the notification_finished_presenting event.", error: error)
         }
     }
 
@@ -160,7 +165,7 @@ extension ActitoPushUIPlugin: ActitoPushUIDelegate {
                 payload: try notification.toJson()
             )
         } catch {
-            logger.error("Failed to emit the notification_failed_to_present event.", error: error)
+            loggerPushUI.error("Failed to emit the notification_failed_to_present event.", error: error)
         }
     }
 
@@ -176,7 +181,7 @@ extension ActitoPushUIPlugin: ActitoPushUIDelegate {
                 payload: payload
             )
         } catch {
-            logger.error("Failed to emit the notification_url_clicked event.", error: error)
+            loggerPushUI.error("Failed to emit the notification_url_clicked event.", error: error)
         }
     }
 
@@ -190,7 +195,7 @@ extension ActitoPushUIPlugin: ActitoPushUIDelegate {
                 ]
             )
         } catch {
-            logger.error("Failed to emit the action_will_execute event.", error: error)
+            loggerPushUI.error("Failed to emit the action_will_execute event.", error: error)
         }
     }
 
@@ -204,7 +209,7 @@ extension ActitoPushUIPlugin: ActitoPushUIDelegate {
                 ]
             )
         } catch {
-            logger.error("Failed to emit the action_executed event.", error: error)
+            loggerPushUI.error("Failed to emit the action_executed event.", error: error)
         }
     }
 
@@ -218,7 +223,7 @@ extension ActitoPushUIPlugin: ActitoPushUIDelegate {
                 ]
             )
         } catch {
-            logger.error("Failed to emit the action_not_executed event.", error: error)
+            loggerPushUI.error("Failed to emit the action_not_executed event.", error: error)
         }
     }
 
@@ -238,7 +243,7 @@ extension ActitoPushUIPlugin: ActitoPushUIDelegate {
                 payload: payload
             )
         } catch {
-            logger.error("Failed to emit the action_failed_to_execute event.", error: error)
+            loggerPushUI.error("Failed to emit the action_failed_to_execute event.", error: error)
         }
     }
 
@@ -255,7 +260,7 @@ extension ActitoPushUIPlugin: ActitoPushUIDelegate {
                 payload: payload
             )
         } catch {
-            logger.error("Failed to emit the custom_action_received event.", error: error)
+            loggerPushUI.error("Failed to emit the custom_action_received event.", error: error)
         }
     }
 }

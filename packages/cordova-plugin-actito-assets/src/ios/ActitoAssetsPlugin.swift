@@ -1,6 +1,10 @@
 import ActitoKit
 import ActitoAssetsKit
 
+#if canImport(Cordova)
+import Cordova
+#endif
+
 @MainActor
 @objc(ActitoAssetsPlugin)
 class ActitoAssetsPlugin : CDVPlugin {

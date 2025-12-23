@@ -1,6 +1,10 @@
 import ActitoKit
 import ActitoInAppMessagingKit
 
+#if canImport(Cordova)
+import Cordova
+#endif
+
 @MainActor
 @objc(ActitoInAppMessagingPlugin)
 class ActitoInAppMessagingPlugin : CDVPlugin {
@@ -8,6 +12,7 @@ class ActitoInAppMessagingPlugin : CDVPlugin {
     override func pluginInitialize() {
         super.pluginInitialize()
 
+        loggerInAppMessaging.hasDebugLoggingEnabled = Actito.shared.options?.debugLoggingEnabled ?? false
         Actito.shared.inAppMessaging().delegate = self
     }
 
@@ -56,7 +61,7 @@ extension ActitoInAppMessagingPlugin: ActitoInAppMessagingDelegate {
                 payload: try message.toJson()
             )
         } catch {
-            logger.error("Failed to emit the message_presented event.", error: error)
+            loggerInAppMessaging.error("Failed to emit the message_presented event.", error: error)
         }
     }
 
@@ -67,7 +72,7 @@ extension ActitoInAppMessagingPlugin: ActitoInAppMessagingDelegate {
                 payload: try message.toJson()
             )
         } catch {
-            logger.error("Failed to emit the message_finished_presenting event.", error: error)
+            loggerInAppMessaging.error("Failed to emit the message_finished_presenting event.", error: error)
         }
     }
 
@@ -78,7 +83,7 @@ extension ActitoInAppMessagingPlugin: ActitoInAppMessagingDelegate {
                 payload: try message.toJson()
             )
         } catch {
-            logger.error("Failed to emit the message_failed_to_present event.", error: error)
+            loggerInAppMessaging.error("Failed to emit the message_failed_to_present event.", error: error)
         }
     }
 
@@ -92,7 +97,7 @@ extension ActitoInAppMessagingPlugin: ActitoInAppMessagingDelegate {
                 ]
             )
         } catch {
-            logger.error("Failed to emit the action_executed event.", error: error)
+            loggerInAppMessaging.error("Failed to emit the action_executed event.", error: error)
         }
     }
 
@@ -112,7 +117,7 @@ extension ActitoInAppMessagingPlugin: ActitoInAppMessagingDelegate {
                 payload: payload
             )
         } catch {
-            logger.error("Failed to emit the action_failed_to_execute event.", error: error)
+            loggerInAppMessaging.error("Failed to emit the action_failed_to_execute event.", error: error)
         }
     }
 }

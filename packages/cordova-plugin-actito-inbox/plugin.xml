@@ -42,7 +42,7 @@
         <framework custom="true" src="src/android/build-extras.gradle" type="gradleReference" />
     </platform>
 
-    <platform name="ios">
+    <platform name="ios" package="swift">
         <config-file target="config.xml" parent="/*">
             <feature name="ActitoInbox">
                 <param name="ios-package" value="ActitoInboxPlugin" />
@@ -52,13 +52,14 @@
 
         <source-file src="src/ios/ActitoInboxPlugin.swift" />
         <source-file src="src/ios/ActitoInboxPluginEventBroker.swift" />
+        <source-file src="src/ios/ActitoInboxLogger.swift" />
 
         <podspec>
             <config>
                 <source url="https://github.com/CocoaPods/Specs.git" />
             </config>
             <pods use-frameworks="true">
-                <pod name="Actito/ActitoInboxKit" spec="5.0.0-beta.2" />
+                <pod name="Actito/ActitoInboxKit" spec="5.0.0-beta.2" nospm="true" />
             </pods>
         </podspec>
     </platform>

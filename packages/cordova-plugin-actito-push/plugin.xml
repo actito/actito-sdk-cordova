@@ -57,7 +57,7 @@
         <framework custom="true" src="src/android/build-extras.gradle" type="gradleReference" />
     </platform>
 
-    <platform name="ios">
+    <platform name="ios" package="swift">
         <hook type="after_prepare" src="src/hooks/ios/after-prepare.js"/>
 
         <config-file target="config.xml" parent="/*">
@@ -83,13 +83,14 @@
 
         <source-file src="src/ios/ActitoPushPlugin.swift" />
         <source-file src="src/ios/ActitoPushPluginEventBroker.swift" />
+        <source-file src="src/ios/ActitoPushLogger.swift" />
 
         <podspec>
             <config>
                 <source url="https://github.com/CocoaPods/Specs.git" />
             </config>
             <pods use-frameworks="true">
-                <pod name="Actito/ActitoPushKit" spec="5.0.0-beta.2" />
+                <pod name="Actito/ActitoPushKit" spec="5.0.0-beta.2" nospm="true" />
             </pods>
         </podspec>
     </platform>

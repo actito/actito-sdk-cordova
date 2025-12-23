@@ -40,7 +40,7 @@ class ActitoPluginEventBroker {
 
         guard !eventQueue.isEmpty else { return }
 
-        logger.debug("Processing event queue with ${eventQueue.size} items.")
+        logger.debug("Processing event queue with \(eventQueue.count) items.")
         eventQueue.forEach { consumer($0) }
         eventQueue.removeAll()
     }
