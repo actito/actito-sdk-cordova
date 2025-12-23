@@ -12,7 +12,9 @@ class ActitoInboxPlugin : CDVPlugin {
     }
 
     @objc func registerListener(_ command: CDVInvokedUrlCommand) {
-        ActitoInboxPluginEventBroker.startListening(settings: commandDelegate.settings) { event in
+        let holdEventsUntilReady = self.commandDelegate.settings["com.actito.cordova.hold_events_until_ready"] as? String == "true"
+
+        ActitoInboxPluginEventBroker.startListening(holdEventsUntilReady: holdEventsUntilReady) { event in
             var payload: [String: Any] = [
                 "name": event.name,
             ]
@@ -21,8 +23,8 @@ class ActitoInboxPlugin : CDVPlugin {
                 payload["data"] = data
             }
 
-            let result = CDVPluginResult(status: .ok, messageAs: payload)
-            result!.keepCallback = true
+            let result: CDVPluginResult = CDVPluginResult(status: .ok, messageAs: payload)
+            result.keepCallback = true
 
             self.commandDelegate!.send(result, callbackId: command.callbackId)
         }

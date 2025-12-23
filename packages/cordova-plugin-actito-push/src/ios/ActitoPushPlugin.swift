@@ -12,7 +12,9 @@ class ActitoPushPlugin : CDVPlugin {
     }
 
     @objc func registerListener(_ command: CDVInvokedUrlCommand) {
-        ActitoPushPluginEventBroker.startListening(settings: commandDelegate.settings) { event in
+        let holdEventsUntilReady = self.commandDelegate.settings["com.actito.cordova.hold_events_until_ready"] as? String == "true"
+
+        ActitoPushPluginEventBroker.startListening(holdEventsUntilReady: holdEventsUntilReady) { event in
             var payload: [String: Any] = [
                 "name": event.name,
             ]
@@ -21,8 +23,8 @@ class ActitoPushPlugin : CDVPlugin {
                 payload["data"] = data
             }
 
-            let result = CDVPluginResult(status: .ok, messageAs: payload)
-            result!.keepCallback = true
+            let result: CDVPluginResult = CDVPluginResult(status: .ok, messageAs: payload)
+            result.keepCallback = true
 
             self.commandDelegate!.send(result, callbackId: command.callbackId)
         }
@@ -157,7 +159,14 @@ class ActitoPushPlugin : CDVPlugin {
     }
 
     @objc func getTransport(_ command: CDVInvokedUrlCommand) {
-        let result = CDVPluginResult(status: .ok, messageAs: Actito.shared.push().transport?.rawValue)
+        let transport = Actito.shared.push().transport?.rawValue
+
+        let result = if let transport {
+            CDVPluginResult(status: .ok, messageAs: transport)
+        } else {
+            CDVPluginResult(status: .ok)
+        }
+
         self.commandDelegate!.send(result, callbackId: command.callbackId)
     }
 
@@ -165,7 +174,12 @@ class ActitoPushPlugin : CDVPlugin {
         do {
             let json = try Actito.shared.push().subscription?.toJson()
 
-            let result = CDVPluginResult(status: .ok, messageAs: json)
+            let result = if let json {
+                CDVPluginResult(status: .ok, messageAs: json)
+            } else {
+                CDVPluginResult(status: .ok)
+            }
+
             self.commandDelegate!.send(result, callbackId: command.callbackId)
         } catch {
             let result = CDVPluginResult(status: .error, messageAs: error.localizedDescription)
@@ -205,8 +219,10 @@ class ActitoPushPlugin : CDVPlugin {
     }
 
     @objc func checkPermissionStatus(_ command: CDVInvokedUrlCommand) {
-        checkPermissionStatus { status in
+        Task {
+            let status = await checkPermissionStatus()
             let result = CDVPluginResult(status: .ok, messageAs: status.rawValue)
+
             self.commandDelegate!.send(result, callbackId: command.callbackId)
         }
     }
@@ -222,22 +238,22 @@ class ActitoPushPlugin : CDVPlugin {
     }
 
     @objc func requestPermission(_ command: CDVInvokedUrlCommand) {
-        checkPermissionStatus { status in
+        Task {
+            let status = await checkPermissionStatus()
+
             guard status != .granted && status != .permanentlyDenied else {
                 let result = CDVPluginResult(status: .ok, messageAs: status.rawValue)
                 self.commandDelegate!.send(result, callbackId: command.callbackId)
                 return
             }
 
-            let authorizationOptions = Actito.shared.push().authorizationOptions
+            do {
+                let authorizationOptions = Actito.shared.push().authorizationOptions
+                let granted = try await UNUserNotificationCenter.current().requestAuthorization(options: authorizationOptions)
+                let result = CDVPluginResult(status: .ok, messageAs: granted ? PermissionStatus.granted.rawValue : PermissionStatus.denied.rawValue)
 
-            UNUserNotificationCenter.current().requestAuthorization(options: authorizationOptions) { (granted, error) in
-                if error == nil {
-                    let result = CDVPluginResult(status: .ok, messageAs: granted ? PermissionStatus.granted.rawValue : PermissionStatus.denied.rawValue)
-                    self.commandDelegate!.send(result, callbackId: command.callbackId)
-                    return
-                }
-
+                self.commandDelegate!.send(result, callbackId: command.callbackId)
+            } catch {
                 let result = CDVPluginResult(status: .error, messageAs: "Unable to request notifications permission.")
                 self.commandDelegate!.send(result, callbackId: command.callbackId)
             }
@@ -264,20 +280,20 @@ class ActitoPushPlugin : CDVPlugin {
         }
     }
 
-    private func checkPermissionStatus(_ completion: @escaping (PermissionStatus) -> Void) {
-        UNUserNotificationCenter.current().getNotificationSettings { status in
-            var permissionStatus = PermissionStatus.denied
+    private func checkPermissionStatus() async -> PermissionStatus {
+        let status = await UNUserNotificationCenter.current().notificationSettings()
 
-            if status.authorizationStatus == .authorized {
-                permissionStatus = PermissionStatus.granted
-            }
+        var permissionStatus = PermissionStatus.denied
 
-            if status.authorizationStatus == .denied {
-                permissionStatus = PermissionStatus.permanentlyDenied
-            }
-
-            completion(permissionStatus)
+        if status.authorizationStatus == .authorized {
+            permissionStatus = PermissionStatus.granted
         }
+
+        if status.authorizationStatus == .denied {
+            permissionStatus = PermissionStatus.permanentlyDenied
+        }
+
+        return permissionStatus
     }
 }
 
