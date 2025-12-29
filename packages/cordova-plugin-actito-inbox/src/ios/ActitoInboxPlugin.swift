@@ -1,6 +1,10 @@
 import ActitoKit
 import ActitoInboxKit
 
+#if canImport(Cordova)
+import Cordova
+#endif
+
 @MainActor
 @objc(ActitoInboxPlugin)
 class ActitoInboxPlugin : CDVPlugin {
@@ -8,6 +12,7 @@ class ActitoInboxPlugin : CDVPlugin {
     override func pluginInitialize() {
         super.pluginInitialize()
 
+        loggerInbox.hasDebugLoggingEnabled = Actito.shared.options?.debugLoggingEnabled ?? false
         Actito.shared.inbox().delegate = self
     }
 
@@ -179,7 +184,7 @@ extension ActitoInboxPlugin: ActitoInboxDelegate {
                 payload: try items.map { try $0.toJson() }
             )
         } catch {
-            logger.error("Failed to emit the inbox_updated event.", error: error)
+            loggerInbox.error("Failed to emit the inbox_updated event.", error: error)
         }
     }
 

@@ -1,6 +1,10 @@
 import ActitoKit
 import ActitoLoyaltyKit
 
+#if canImport(Cordova)
+import Cordova
+#endif
+
 @MainActor
 @objc(ActitoLoyaltyPlugin)
 class ActitoLoyaltyPlugin : CDVPlugin {

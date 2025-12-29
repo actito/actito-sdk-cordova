@@ -34,13 +34,13 @@ class ActitoPushPluginEventBroker {
 
     static private func processQueue() {
         guard let consumer = consumer else {
-            logger.debug("Cannot process event queue without a consumer.")
+            loggerPush.debug("Cannot process event queue without a consumer.")
             return
         }
 
         guard !eventQueue.isEmpty else { return }
 
-        logger.debug("Processing event queue with ${eventQueue.size} items.")
+        loggerPush.debug("Processing event queue with \(eventQueue.count) items.")
         eventQueue.forEach { consumer($0) }
         eventQueue.removeAll()
     }

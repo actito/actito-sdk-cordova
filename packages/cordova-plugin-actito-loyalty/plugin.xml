@@ -46,7 +46,7 @@
         <framework custom="true" src="src/android/build-extras.gradle" type="gradleReference" />
     </platform>
 
-    <platform name="ios">
+    <platform name="ios" package="swift">
         <config-file target="config.xml" parent="/*">
             <feature name="ActitoLoyalty">
                 <param name="ios-package" value="ActitoLoyaltyPlugin" />
@@ -61,7 +61,7 @@
                 <source url="https://github.com/CocoaPods/Specs.git" />
             </config>
             <pods use-frameworks="true">
-                <pod name="Actito/ActitoLoyaltyKit" spec="5.0.0-beta.2" />
+                <pod name="Actito/ActitoLoyaltyKit" spec="5.0.0-beta.2" nospm="true" />
             </pods>
         </podspec>
     </platform>
