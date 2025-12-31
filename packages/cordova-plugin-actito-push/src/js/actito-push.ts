@@ -243,7 +243,7 @@ export class ActitoPush {
     callback: (data: {
       notification: ActitoNotification;
       deliveryMechanism: ActitoNotificationDeliveryMechanism;
-    }) => void
+    }) => void,
   ): EventSubscription {
     return new EventSubscription('notification_info_received', callback);
   }
@@ -258,7 +258,7 @@ export class ActitoPush {
    * onSystemNotificationReceived event.
    */
   public static onSystemNotificationReceived(
-    callback: (notification: ActitoSystemNotification) => void
+    callback: (notification: ActitoSystemNotification) => void,
   ): EventSubscription {
     return new EventSubscription('system_notification_received', callback);
   }
@@ -274,7 +274,7 @@ export class ActitoPush {
    */
   public static onUnknownNotificationReceived(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    callback: (notification: Record<string, any>) => void
+    callback: (notification: Record<string, any>) => void,
   ): EventSubscription {
     return new EventSubscription('unknown_notification_received', callback);
   }
@@ -317,7 +317,7 @@ export class ActitoPush {
    * onNotificationActionOpened event.
    */
   public static onNotificationActionOpened(
-    callback: (data: { notification: ActitoNotification; action: ActitoNotificationAction }) => void
+    callback: (data: { notification: ActitoNotification; action: ActitoNotificationAction }) => void,
   ): EventSubscription {
     return new EventSubscription('notification_action_opened', callback);
   }
@@ -334,7 +334,7 @@ export class ActitoPush {
    */
   public static onUnknownNotificationActionOpened(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    callback: (data: { notification: Record<string, any>; action: string; responseText?: string }) => void
+    callback: (data: { notification: Record<string, any>; action: string; responseText?: string }) => void,
   ): EventSubscription {
     return new EventSubscription('unknown_notification_action_opened', callback);
   }
@@ -364,7 +364,7 @@ export class ActitoPush {
    * onSubscriptionChanged event.
    */
   public static onSubscriptionChanged(
-    callback: (subscription: ActitoPushSubscription | undefined) => void
+    callback: (subscription: ActitoPushSubscription | undefined) => void,
   ): EventSubscription {
     return new EventSubscription('subscription_changed', callback);
   }
@@ -380,7 +380,7 @@ export class ActitoPush {
    * onShouldOpenNotificationSettings event.
    */
   public static onShouldOpenNotificationSettings(
-    callback: (notification: ActitoNotification | null) => void
+    callback: (notification: ActitoNotification | null) => void,
   ): EventSubscription {
     return new EventSubscription('should_open_notification_settings', callback);
   }

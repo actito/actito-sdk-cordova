@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-require-imports */
 
 const cordovaIos = require('cordova-ios');
 const fs = require('fs');
@@ -60,9 +60,8 @@ function initialSetup(proj, extConfigRefs, appBundleID, extName) {
       return;
     }
 
-    proj.hash.project.objects['XCBuildConfiguration'][ref].buildSettings[
-      'PRODUCT_BUNDLE_IDENTIFIER'
-    ] = `${appBundleID}.NotificationServiceExtension`;
+    proj.hash.project.objects['XCBuildConfiguration'][ref].buildSettings['PRODUCT_BUNDLE_IDENTIFIER'] =
+      `${appBundleID}.NotificationServiceExtension`;
     proj.hash.project.objects['XCBuildConfiguration'][ref].buildSettings['PRODUCT_NAME'] = `${extName}`;
   });
 }

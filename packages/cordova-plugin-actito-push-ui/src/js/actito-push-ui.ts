@@ -82,7 +82,7 @@ export class ActitoPushUI {
    * onNotificationFinishedPresenting event.
    */
   public static onNotificationFinishedPresenting(
-    callback: (notification: ActitoNotification) => void
+    callback: (notification: ActitoNotification) => void,
   ): EventSubscription {
     return new EventSubscription('notification_finished_presenting', callback);
   }
@@ -115,7 +115,7 @@ export class ActitoPushUI {
    * onNotificationUrlClicked event.
    */
   public static onNotificationUrlClicked(
-    callback: (data: { notification: ActitoNotification; url: string }) => void
+    callback: (data: { notification: ActitoNotification; url: string }) => void,
   ): EventSubscription {
     return new EventSubscription('notification_url_clicked', callback);
   }
@@ -134,7 +134,7 @@ export class ActitoPushUI {
    * onActionWillExecute event.
    */
   public static onActionWillExecute(
-    callback: (data: { notification: ActitoNotification; action: ActitoNotificationAction }) => void
+    callback: (data: { notification: ActitoNotification; action: ActitoNotificationAction }) => void,
   ): EventSubscription {
     return new EventSubscription('action_will_execute', callback);
   }
@@ -153,7 +153,7 @@ export class ActitoPushUI {
    * onActionExecuted event.
    */
   public static onActionExecuted(
-    callback: (data: { notification: ActitoNotification; action: ActitoNotificationAction }) => void
+    callback: (data: { notification: ActitoNotification; action: ActitoNotificationAction }) => void,
   ): EventSubscription {
     return new EventSubscription('action_executed', callback);
   }
@@ -173,7 +173,7 @@ export class ActitoPushUI {
    * onActionNotExecuted event.
    */
   public static onActionNotExecuted(
-    callback: (data: { notification: ActitoNotification; action: ActitoNotificationAction }) => void
+    callback: (data: { notification: ActitoNotification; action: ActitoNotificationAction }) => void,
   ): EventSubscription {
     return new EventSubscription('action_not_executed', callback);
   }
@@ -193,7 +193,7 @@ export class ActitoPushUI {
    * onActionFailedToExecute event.
    */
   public static onActionFailedToExecute(
-    callback: (data: { notification: ActitoNotification; action: ActitoNotificationAction; error?: string }) => void
+    callback: (data: { notification: ActitoNotification; action: ActitoNotificationAction; error?: string }) => void,
   ): EventSubscription {
     return new EventSubscription('action_failed_to_execute', callback);
   }
@@ -213,7 +213,7 @@ export class ActitoPushUI {
    * onCustomActionReceived event.
    */
   public static onCustomActionReceived(
-    callback: (data: { notification: ActitoNotification; action: ActitoNotificationAction; url: string }) => void
+    callback: (data: { notification: ActitoNotification; action: ActitoNotificationAction; url: string }) => void,
   ): EventSubscription {
     return new EventSubscription('custom_action_received', callback);
   }

@@ -152,7 +152,7 @@ export class ActitoGeo {
    */
   public static async presentPermissionRationale(
     permission: PermissionGroup,
-    rationale: PermissionRationale
+    rationale: PermissionRationale,
   ): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       cordova.exec(resolve, reject, 'ActitoGeo', 'presentPermissionRationale', [permission, rationale]);
@@ -268,7 +268,7 @@ export class ActitoGeo {
    * event.
    */
   public static onBeaconsRanged(
-    callback: (data: { region: ActitoRegion; beacons: ActitoBeacon[] }) => void
+    callback: (data: { region: ActitoRegion; beacons: ActitoBeacon[] }) => void,
   ): EventSubscription {
     return new EventSubscription('beacons_ranged', callback);
   }
