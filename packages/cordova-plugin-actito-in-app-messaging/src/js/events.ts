@@ -14,16 +14,19 @@ export function bootstrap(): void {
         },
         'ActitoInAppMessaging',
         'registerListener',
-        []
+        [],
       );
     },
-    false
+    false,
   );
 }
 
 export class EventSubscription {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  constructor(readonly event: string, readonly callback: (data: any) => void) {
+  constructor(
+    readonly event: string,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    readonly callback: (data: any) => void,
+  ) {
     EVENT_SUBSCRIPTIONS.push(this);
   }
 
