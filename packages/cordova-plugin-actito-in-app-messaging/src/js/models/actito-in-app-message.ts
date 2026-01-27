@@ -9,7 +9,6 @@ export interface ActitoInAppMessage {
    * Unique identifier of the in-app message.
    */
   readonly id: string;
-  readonly identifier: string;
 
   /**
    * Human-readable name of the message.
