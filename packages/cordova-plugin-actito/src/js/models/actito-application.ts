@@ -1,7 +1,7 @@
 import type { ActitoNotificationAction } from './actito-notification';
 
 /**
- * Represents an Actito application configuration.
+ * Represents an Actito application.
  *
  * An {@link ActitoApplication} describes the capabilities, services, and configuration
  * of an application as defined in Actito. It includes enabled services, region
@@ -19,7 +19,7 @@ export interface ActitoApplication {
   readonly name: string;
 
   /**
-   * Category of the application as defined in Actito.
+   * Category of the application.
    */
   readonly category: string;
 
@@ -50,7 +50,7 @@ export interface ActitoApplication {
 }
 
 /**
- * Configuration related to the Actito inbox feature.
+ * Configuration related to inbox-based features.
  */
 export interface ActitoInboxConfig {
   /**
@@ -59,7 +59,7 @@ export interface ActitoInboxConfig {
   readonly useInbox: boolean;
 
   /**
-   * Whether unread inbox messages should automatically update the application
+   * Whether inbox messages should automatically update the application
    * badge count.
    */
   readonly autoBadge: boolean;

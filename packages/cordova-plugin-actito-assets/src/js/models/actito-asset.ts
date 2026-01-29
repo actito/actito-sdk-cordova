@@ -36,7 +36,7 @@ export interface ActitoAsset {
   readonly metaData?: ActitoAssetMetaData;
 
   /**
-   * Additional unstructured fields not explicitly modeled.
+   * Collection of key-value pairs used to add extra information to the asset.
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   readonly extra: Record<string, any>;
