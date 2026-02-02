@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-actito",
-  "version": "5.0.0-beta.2",
+  "version": "5.0.0",
   "description": "Actito Cordova Plugin.",
   "author": "Actito <mobile@actito.com> (https://actito.com)",
   "license": "MIT",
