@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-require-imports */
 
 const utils = require('cordova-plugin-actito/src/hooks/utils');
 const { setupPlistSettings } = require('./setup-plist-settings');
@@ -13,5 +13,5 @@ module.exports = function (context) {
   }
 
   setupServiceExtension(context, appConfig);
-  setupPlistSettings(appConfig);
+  setupPlistSettings(context, appConfig);
 };

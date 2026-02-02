@@ -1,6 +1,10 @@
 import ActitoKit
 import ActitoUserInboxKit
 
+#if canImport(Cordova)
+import Cordova
+#endif
+
 @objc(ActitoUserInboxPlugin)
 class ActitoUserInboxPlugin : CDVPlugin {
 

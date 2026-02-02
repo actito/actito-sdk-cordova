@@ -1,6 +1,10 @@
 import ActitoKit
 import ActitoInAppMessagingKit
 
+#if canImport(Cordova)
+import Cordova
+#endif
+
 @MainActor
 @objc(ActitoInAppMessagingPlugin)
 class ActitoInAppMessagingPlugin : CDVPlugin {
@@ -8,11 +12,14 @@ class ActitoInAppMessagingPlugin : CDVPlugin {
     override func pluginInitialize() {
         super.pluginInitialize()
 
+        loggerInAppMessaging.hasDebugLoggingEnabled = Actito.shared.options?.debugLoggingEnabled ?? false
         Actito.shared.inAppMessaging().delegate = self
     }
 
     @objc func registerListener(_ command: CDVInvokedUrlCommand) {
-        ActitoInAppMessagingPluginEventBroker.startListening(settings: commandDelegate.settings) { event in
+        let holdEventsUntilReady = self.commandDelegate.settings["com.actito.cordova.hold_events_until_ready"] as? String == "true"
+
+        ActitoInAppMessagingPluginEventBroker.startListening(holdEventsUntilReady: holdEventsUntilReady) { event in
             var payload: [String: Any] = [
                 "name": event.name,
             ]
@@ -21,8 +28,8 @@ class ActitoInAppMessagingPlugin : CDVPlugin {
                 payload["data"] = data
             }
 
-            let result = CDVPluginResult(status: .ok, messageAs: payload)
-            result!.keepCallback = true
+            let result: CDVPluginResult = CDVPluginResult(status: .ok, messageAs: payload)
+            result.keepCallback = true
 
             self.commandDelegate!.send(result, callbackId: command.callbackId)
         }
@@ -54,7 +61,7 @@ extension ActitoInAppMessagingPlugin: ActitoInAppMessagingDelegate {
                 payload: try message.toJson()
             )
         } catch {
-            logger.error("Failed to emit the message_presented event.", error: error)
+            loggerInAppMessaging.error("Failed to emit the message_presented event.", error: error)
         }
     }
 
@@ -65,7 +72,7 @@ extension ActitoInAppMessagingPlugin: ActitoInAppMessagingDelegate {
                 payload: try message.toJson()
             )
         } catch {
-            logger.error("Failed to emit the message_finished_presenting event.", error: error)
+            loggerInAppMessaging.error("Failed to emit the message_finished_presenting event.", error: error)
         }
     }
 
@@ -76,7 +83,7 @@ extension ActitoInAppMessagingPlugin: ActitoInAppMessagingDelegate {
                 payload: try message.toJson()
             )
         } catch {
-            logger.error("Failed to emit the message_failed_to_present event.", error: error)
+            loggerInAppMessaging.error("Failed to emit the message_failed_to_present event.", error: error)
         }
     }
 
@@ -90,7 +97,7 @@ extension ActitoInAppMessagingPlugin: ActitoInAppMessagingDelegate {
                 ]
             )
         } catch {
-            logger.error("Failed to emit the action_executed event.", error: error)
+            loggerInAppMessaging.error("Failed to emit the action_executed event.", error: error)
         }
     }
 
@@ -110,7 +117,7 @@ extension ActitoInAppMessagingPlugin: ActitoInAppMessagingDelegate {
                 payload: payload
             )
         } catch {
-            logger.error("Failed to emit the action_failed_to_execute event.", error: error)
+            loggerInAppMessaging.error("Failed to emit the action_failed_to_execute event.", error: error)
         }
     }
 }

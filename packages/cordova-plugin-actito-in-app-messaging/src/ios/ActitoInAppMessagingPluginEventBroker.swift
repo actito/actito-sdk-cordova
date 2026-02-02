@@ -9,9 +9,7 @@ class ActitoInAppMessagingPluginEventBroker {
     private static var canEmitEvents = false
 
     @MainActor
-    static func startListening(settings: [AnyHashable : Any]?, _ consumer: @escaping Consumer) {
-        let holdEventsUntilReady = settings?["com.actito.cordova.hold_events_until_ready"] as? String == "true"
-
+    static func startListening(holdEventsUntilReady: Bool, _ consumer: @escaping Consumer) {
         self.consumer = consumer
         canEmitEvents = !holdEventsUntilReady || Actito.shared.isReady
 
@@ -36,13 +34,13 @@ class ActitoInAppMessagingPluginEventBroker {
 
     static private func processQueue() {
         guard let consumer = consumer else {
-            logger.debug("Cannot process event queue without a consumer.")
+            loggerInAppMessaging.debug("Cannot process event queue without a consumer.")
             return
         }
 
         guard !eventQueue.isEmpty else { return }
 
-        logger.debug("Processing event queue with ${eventQueue.size} items.")
+        loggerInAppMessaging.debug("Processing event queue with \(eventQueue.count) items.")
         eventQueue.forEach { consumer($0) }
         eventQueue.removeAll()
     }

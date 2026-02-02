@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin id="cordova-plugin-actito-assets"
-        version="5.0.0-beta.2"
+        version="5.0.0"
         xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -40,7 +40,7 @@
         <framework custom="true" src="src/android/build-extras.gradle" type="gradleReference" />
     </platform>
 
-    <platform name="ios">
+    <platform name="ios" package="swift">
         <config-file target="config.xml" parent="/*">
             <feature name="ActitoAssets">
                 <param name="ios-package" value="ActitoAssetsPlugin" />
@@ -55,7 +55,7 @@
                 <source url="https://github.com/CocoaPods/Specs.git" />
             </config>
             <pods use-frameworks="true">
-                <pod name="Actito/ActitoAssetsKit" spec="5.0.0-beta.2" />
+                <pod name="Actito/ActitoAssetsKit" spec="5.0.0" nospm="true" />
             </pods>
         </podspec>
     </platform>

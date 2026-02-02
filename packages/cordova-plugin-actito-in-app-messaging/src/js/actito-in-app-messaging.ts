@@ -93,7 +93,7 @@ export class ActitoInAppMessaging {
    * event.
    */
   public static onActionExecuted(
-    callback: (data: { message: ActitoInAppMessage; action: ActitoInAppMessageAction }) => void
+    callback: (data: { message: ActitoInAppMessage; action: ActitoInAppMessageAction }) => void,
   ): EventSubscription {
     return new EventSubscription('action_executed', callback);
   }
@@ -112,7 +112,7 @@ export class ActitoInAppMessaging {
    * event.
    */
   public static onActionFailedToExecute(
-    callback: (data: { message: ActitoInAppMessage; action: ActitoInAppMessageAction; error?: string }) => void
+    callback: (data: { message: ActitoInAppMessage; action: ActitoInAppMessageAction; error?: string }) => void,
   ): EventSubscription {
     return new EventSubscription('action_failed_to_execute', callback);
   }

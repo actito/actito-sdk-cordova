@@ -1,13 +1,17 @@
 import ActitoKit
 import ActitoLoyaltyKit
 
+#if canImport(Cordova)
+import Cordova
+#endif
+
 @MainActor
 @objc(ActitoLoyaltyPlugin)
 class ActitoLoyaltyPlugin : CDVPlugin {
 
     private var rootViewController: UIViewController? {
         get {
-            UIApplication.shared.delegate?.window??.rootViewController
+            self.viewController.view.window?.rootViewController
         }
     }
 

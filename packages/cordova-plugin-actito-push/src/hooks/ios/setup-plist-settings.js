@@ -1,14 +1,18 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-require-imports */
 
+const cordovaIos = require('cordova-ios');
 const fs = require('fs-extra');
+const path = require('path');
 const plist = require('plist');
 
-function setupPlistSettings(appConfig) {
-  const appName = appConfig.name();
+function setupPlistSettings(context, appConfig) {
+  const projectRoot = context.opts.projectRoot;
+  const iosPlatformPath = path.join(projectRoot, 'platforms', 'ios');
+  const iosProject = new cordovaIos('ios', iosPlatformPath);
+  const projName = path.basename(iosProject.locations.xcodeCordovaProj);
   const extName = 'NotificationServiceExtension';
-  const iosPath = 'platforms/ios/';
-  const appPlistPath = `${iosPath}${appName}/${appName}-Info.plist`;
-  const extPlistPath = `${iosPath}${extName}/${extName}-Info.plist`;
+  const appPlistPath = path.join(iosProject.locations.xcodeCordovaProj, `${projName}-Info.plist`);
+  const extPlistPath = path.join(iosPlatformPath, extName, `${extName}-Info.plist`);
 
   let appInfoPlist;
   let extInfoPlist;
@@ -16,7 +20,7 @@ function setupPlistSettings(appConfig) {
   try {
     appInfoPlist = plist.parse(fs.readFileSync(appPlistPath, 'utf8'));
   } catch (e) {
-    console.log(`Failed to parse ${appName}-Info.plist: ${e}`);
+    console.log(`Failed to parse ${projName}-Info.plist: ${e}`);
   }
 
   try {

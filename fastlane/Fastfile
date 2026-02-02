@@ -171,10 +171,39 @@ def update_native_android_libraries(version)
 end
 
 def update_native_ios_libraries(version)
-  files = Dir['../packages/cordova-plugin-actito*/plugin.xml']
-  regex = /<pod name="Actito\/(Actito.*Kit)" spec=".*" \/>/
-  replacement = "<pod name=\"Actito/\\1\" spec=\"#{version}\" />"
+  UI.message('Updating native iOS podspec.')
+  update_native_ios_podspec_files(version)
 
+  UI.message('Updating native iOS SPM files.')
+  update_native_ios_spm_files(version)
+end
+
+def update_native_ios_podspec_files(version)
+  files = Dir['../packages/cordova-plugin-actito*/plugin.xml']
+
+  regex = /
+    <pod
+    \s+name="Actito\/(Actito.*Kit)"
+    \s+spec="[^"]*"
+    (\s+nospm="true")?
+    \s*\/>
+  /x
+
+  replacement = '<pod name="Actito/\1" spec="' + version + '"\2 />'
+
+  files.each { |file| update_file(file, regex, replacement) }
+end
+
+def update_native_ios_spm_files(version)
+  files = Dir['../packages/cordova-plugin-actito*/Package.swift']
+  regex = /
+    (\.package\(
+      \s*url:\s*"https:\/\/github\.com\/Actito\/actito-sdk-ios\.git",
+      \s*from:\s*")([^"]+)
+      ("\s*\),?)
+  /x
+
+  replacement = "\\1#{version}\\3"
   files.each { |file| update_file(file, regex, replacement) }
 end
 

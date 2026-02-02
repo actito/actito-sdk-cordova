@@ -1,6 +1,10 @@
 import ActitoKit
 import ActitoInboxKit
 
+#if canImport(Cordova)
+import Cordova
+#endif
+
 @MainActor
 @objc(ActitoInboxPlugin)
 class ActitoInboxPlugin : CDVPlugin {
@@ -8,11 +12,14 @@ class ActitoInboxPlugin : CDVPlugin {
     override func pluginInitialize() {
         super.pluginInitialize()
 
+        loggerInbox.hasDebugLoggingEnabled = Actito.shared.options?.debugLoggingEnabled ?? false
         Actito.shared.inbox().delegate = self
     }
 
     @objc func registerListener(_ command: CDVInvokedUrlCommand) {
-        ActitoInboxPluginEventBroker.startListening(settings: commandDelegate.settings) { event in
+        let holdEventsUntilReady = self.commandDelegate.settings["com.actito.cordova.hold_events_until_ready"] as? String == "true"
+
+        ActitoInboxPluginEventBroker.startListening(holdEventsUntilReady: holdEventsUntilReady) { event in
             var payload: [String: Any] = [
                 "name": event.name,
             ]
@@ -21,8 +28,8 @@ class ActitoInboxPlugin : CDVPlugin {
                 payload["data"] = data
             }
 
-            let result = CDVPluginResult(status: .ok, messageAs: payload)
-            result!.keepCallback = true
+            let result: CDVPluginResult = CDVPluginResult(status: .ok, messageAs: payload)
+            result.keepCallback = true
 
             self.commandDelegate!.send(result, callbackId: command.callbackId)
         }
@@ -177,7 +184,7 @@ extension ActitoInboxPlugin: ActitoInboxDelegate {
                 payload: try items.map { try $0.toJson() }
             )
         } catch {
-            logger.error("Failed to emit the inbox_updated event.", error: error)
+            loggerInbox.error("Failed to emit the inbox_updated event.", error: error)
         }
     }
 

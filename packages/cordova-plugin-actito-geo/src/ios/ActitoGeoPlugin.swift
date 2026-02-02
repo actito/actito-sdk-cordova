@@ -1,6 +1,10 @@
-import CoreLocation
 import ActitoKit
 import ActitoGeoKit
+import CoreLocation
+
+#if canImport(Cordova)
+import Cordova
+#endif
 
 fileprivate let REQUESTED_LOCATION_ALWAYS_KEY = "com.actito.geo.cordova.requested_location_always"
 
@@ -22,6 +26,7 @@ class ActitoGeoPlugin : CDVPlugin {
     override func pluginInitialize() {
         super.pluginInitialize()
 
+        loggerGeo.hasDebugLoggingEnabled = Actito.shared.options?.debugLoggingEnabled ?? false
         Actito.shared.geo().delegate = self
 
         locationManager = CLLocationManager()
@@ -29,7 +34,9 @@ class ActitoGeoPlugin : CDVPlugin {
     }
 
     @objc func registerListener(_ command: CDVInvokedUrlCommand) {
-        ActitoGeoPluginEventBroker.startListening(settings: commandDelegate.settings) { event in
+        let holdEventsUntilReady = self.commandDelegate.settings["com.actito.cordova.hold_events_until_ready"] as? String == "true"
+
+        ActitoGeoPluginEventBroker.startListening(holdEventsUntilReady: holdEventsUntilReady) { event in
             var payload: [String: Any] = [
                 "name": event.name,
             ]
@@ -38,8 +45,8 @@ class ActitoGeoPlugin : CDVPlugin {
                 payload["data"] = data
             }
 
-            let result = CDVPluginResult(status: .ok, messageAs: payload)
-            result!.keepCallback = true
+            let result: CDVPluginResult = CDVPluginResult(status: .ok, messageAs: payload)
+            result.keepCallback = true
 
             self.commandDelegate!.send(result, callbackId: command.callbackId)
         }
@@ -266,7 +273,7 @@ extension ActitoGeoPlugin: ActitoGeoDelegate {
                 payload: try location.toJson()
             )
         } catch {
-            logger.error("Failed to emit the location_updated event.", error: error)
+            loggerGeo.error("Failed to emit the location_updated event.", error: error)
         }
     }
 
@@ -277,7 +284,7 @@ extension ActitoGeoPlugin: ActitoGeoDelegate {
                 payload: try region.toJson()
             )
         } catch {
-            logger.error("Failed to emit the region_entered event.", error: error)
+            loggerGeo.error("Failed to emit the region_entered event.", error: error)
         }
     }
 
@@ -288,7 +295,7 @@ extension ActitoGeoPlugin: ActitoGeoDelegate {
                 payload: try region.toJson()
             )
         } catch {
-            logger.error("Failed to emit the region_exited event.", error: error)
+            loggerGeo.error("Failed to emit the region_exited event.", error: error)
         }
     }
 
@@ -299,7 +306,7 @@ extension ActitoGeoPlugin: ActitoGeoDelegate {
                 payload: try beacon.toJson()
             )
         } catch {
-            logger.error("Failed to emit the beacon_entered event.", error: error)
+            loggerGeo.error("Failed to emit the beacon_entered event.", error: error)
         }
     }
 
@@ -310,7 +317,7 @@ extension ActitoGeoPlugin: ActitoGeoDelegate {
                 payload: try beacon.toJson()
             )
         } catch {
-            logger.error("Failed to emit the beacon_exited event.", error: error)
+            loggerGeo.error("Failed to emit the beacon_exited event.", error: error)
         }
     }
 
@@ -326,7 +333,7 @@ extension ActitoGeoPlugin: ActitoGeoDelegate {
                 payload: payload
             )
         } catch {
-            logger.error("Failed to emit the beacons_ranged event.", error: error)
+            loggerGeo.error("Failed to emit the beacons_ranged event.", error: error)
         }
     }
 
@@ -337,7 +344,7 @@ extension ActitoGeoPlugin: ActitoGeoDelegate {
                 payload: try visit.toJson()
             )
         } catch {
-            logger.error("Failed to emit the visit event.", error: error)
+            loggerGeo.error("Failed to emit the visit event.", error: error)
         }
     }
 
@@ -348,7 +355,7 @@ extension ActitoGeoPlugin: ActitoGeoDelegate {
                 payload: try heading.toJson()
             )
         } catch {
-            logger.error("Failed to emit the heading_updated event.", error: error)
+            loggerGeo.error("Failed to emit the heading_updated event.", error: error)
         }
     }
 }
