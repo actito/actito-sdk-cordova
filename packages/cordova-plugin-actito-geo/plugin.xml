@@ -61,7 +61,7 @@
                 <source url="https://github.com/CocoaPods/Specs.git" />
             </config>
             <pods use-frameworks="true">
-                <pod name="Actito/ActitoGeoKit" spec="5.0.0-beta.2" nospm="true" />
+                <pod name="Actito/ActitoGeoKit" spec="5.0.0" nospm="true" />
             </pods>
         </podspec>
     </platform>
