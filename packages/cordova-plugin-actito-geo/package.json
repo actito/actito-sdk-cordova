@@ -6,7 +6,7 @@
   "license": "MIT",
   "homepage": "https://github.com/actito/actito-sdk-cordova#readme",
   "repository": {
-    "url": "https://github.com/Actito/actito-sdk-cordova"
+    "url": "git+https://github.com/Actito/actito-sdk-cordova.git"
   },
   "bugs": {
     "url": "https://github.com/Actito/actito-sdk-cordova/issues"
