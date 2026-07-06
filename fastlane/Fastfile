@@ -7,7 +7,7 @@ Updates the versions of the native libraries.
 #### Options
 * `version`: The version of the native libraries.
 * `platform`: The platform to update. Leave blank to update both.
-* `local`: Use the local iOS SDK for SPM dependencies.
+* `local`: Whether to use the local SPM instead of the remote.
 
 #### Examples
 ```sh
