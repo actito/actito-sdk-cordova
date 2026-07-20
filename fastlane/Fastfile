@@ -1,20 +1,27 @@
+ACTITO_IOS_SDK_NAME = "actito-sdk-ios"
+ACTITO_IOS_SDK_URL = "https://github.com/Actito/actito-sdk-ios.git"
+
 desc <<-DESC
 Updates the versions of the native libraries.
 
 #### Options
 * `version`: The version of the native libraries.
 * `platform`: The platform to update. Leave blank to update both.
+* `local`: Whether to use the local SPM instead of the remote.
 
 #### Examples
 ```sh
 bundle exec fastlane update_native_libraries version:3.4.0
 bundle exec fastlane update_native_libraries version:3.4.0 platform:android
 bundle exec fastlane update_native_libraries version:3.4.0 platform:ios
+bundle exec fastlane update_native_libraries version:3.4.0 local:true
+bundle exec fastlane update_native_libraries version:3.4.0 platform:ios local:true
 ```
 DESC
 lane :update_native_libraries do |options|
   version = options[:version]
   platform = options[:platform]
+  local = options[:local]
 
   if version.nil?
     UI.user_error!("Missing required 'version' parameter.")
@@ -28,6 +35,8 @@ lane :update_native_libraries do |options|
   if platform.nil? || platform.downcase == 'ios'
     UI.message('Updating native iOS libraries.')
     update_native_ios_libraries(version)
+
+    update_cordova_ios_spm_dependencies_with_local_libs if local
   end
 end
 
@@ -171,14 +180,14 @@ def update_native_android_libraries(version)
 end
 
 def update_native_ios_libraries(version)
-  UI.message('Updating native iOS podspec.')
-  update_native_ios_podspec_files(version)
+  UI.message('Updating Cordova iOS pod dependencies.')
+  update_cordova_ios_pod_dependencies(version)
 
-  UI.message('Updating native iOS SPM files.')
-  update_native_ios_spm_files(version)
+  UI.message('Updating Cordova iOS SPM files.')
+  update_cordova_ios_spm_files(version)
 end
 
-def update_native_ios_podspec_files(version)
+def update_cordova_ios_pod_dependencies(version)
   files = Dir['../packages/cordova-plugin-actito*/plugin.xml']
 
   regex = /
@@ -194,17 +203,63 @@ def update_native_ios_podspec_files(version)
   files.each { |file| update_file(file, regex, replacement) }
 end
 
-def update_native_ios_spm_files(version)
+def update_cordova_ios_spm_files(version)
   files = Dir['../packages/cordova-plugin-actito*/Package.swift']
-  regex = /
-    (\.package\(
-      \s*url:\s*"https:\/\/github\.com\/Actito\/actito-sdk-ios\.git",
-      \s*from:\s*")([^"]+)
-      ("\s*\),?)
-  /x
-
-  replacement = "\\1#{version}\\3"
+  regex = actito_ios_spm_dependency_regex
+  replacement = "\\1.package(url: \"#{ACTITO_IOS_SDK_URL}\", from: \"#{version}\")\\2"
   files.each { |file| update_file(file, regex, replacement) }
+end
+
+def update_cordova_ios_spm_dependencies_with_local_libs
+  local_ios_sdk_path = find_local_ios_sdk_path
+  files = Dir['../packages/cordova-plugin-actito*/Package.swift']
+
+  UI.message("Updating Cordova iOS SPM dependencies to use local libs at #{local_ios_sdk_path}.")
+  update_spm_files_with_local_libs(files, local_ios_sdk_path)
+end
+
+def update_spm_files_with_local_libs(files, local_ios_sdk_path)
+  regex = actito_ios_spm_dependency_regex
+  replacement = "\\1.package(path: \"#{local_ios_sdk_path}\")\\2"
+  files.each { |file| update_file(file, regex, replacement) }
+end
+
+def actito_ios_spm_dependency_regex
+  /
+    (^[ \t]*)
+    \.package\s*\(
+      \s*
+      (?:
+        url:\s*"#{Regexp.escape(ACTITO_IOS_SDK_URL)}",\s*from:\s*"[^"]+" |
+        path:\s*"[^"]*#{Regexp.escape(ACTITO_IOS_SDK_NAME)}"
+      )
+      \s*
+    \)
+    (,?)
+  /x
+end
+
+def find_local_ios_sdk_path
+  project_root = File.expand_path('..', __dir__)
+  parent = File.expand_path('..', project_root)
+  direct_candidate = File.join(parent, ACTITO_IOS_SDK_NAME)
+
+  return direct_candidate if Dir.exist?(direct_candidate)
+
+  grand_parent = File.expand_path('..', parent)
+  candidates = Dir[File.join(grand_parent, '*', ACTITO_IOS_SDK_NAME)]
+                 .select { |path| Dir.exist?(path) }
+                 .sort
+
+  if candidates.empty?
+    UI.user_error!("Local iOS SDK folder '#{ACTITO_IOS_SDK_NAME}' not found in #{parent} or one level under #{grand_parent}.")
+  end
+
+  if candidates.length > 1
+    UI.user_error!("Multiple local iOS SDK folders found: #{candidates.join(', ')}")
+  end
+
+  candidates.first
 end
 
 def bootstrap_packages
