@@ -19,9 +19,8 @@
   "author": "Actito",
   "license": "Apache-2.0",
   "devDependencies": {
-    "cordova-android": "^14.0.1",
-    "cordova-ios": "^8.0.0",
-    "cordova-plugin-dialogs": "^2.0.2",
+    "cordova-android": "^15.0.0",
+    "cordova-ios": "^8.1.1",
     "cordova-plugin-actito": "5.1.0",
     "cordova-plugin-actito-assets": "5.1.0",
     "cordova-plugin-actito-geo": "5.1.0",
@@ -30,6 +29,7 @@
     "cordova-plugin-actito-loyalty": "5.1.0",
     "cordova-plugin-actito-push": "5.1.0",
     "cordova-plugin-actito-push-ui": "5.1.0",
+    "cordova-plugin-dialogs": "^2.0.2",
     "ios-deploy": "^1.12.2"
   },
   "cordova": {

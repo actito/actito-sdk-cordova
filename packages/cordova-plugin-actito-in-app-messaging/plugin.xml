@@ -18,10 +18,10 @@
             <preference name="AndroidXEnabled" value="true" />
 
             <preference name="GradlePluginKotlinEnabled" value="true" />
-            <preference name="GradlePluginKotlinVersion" value="2.1.20" />
+            <preference name="GradlePluginKotlinVersion" value="2.1.21" />
 
             <preference name="GradlePluginGoogleServicesEnabled" value="true" />
-            <preference name="GradlePluginGoogleServicesVersion" value="4.3.14" />
+            <preference name="GradlePluginGoogleServicesVersion" value="4.4.2" />
         </config-file>
 
         <config-file target="res/xml/config.xml" parent="/widget">
