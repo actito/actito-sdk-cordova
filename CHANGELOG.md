@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## Upcoming release
+
+- Add new Pass notification type (re.notifica.notification.Pass)
+- Add integration with Qualifio SDK
+
+#### Native changes
+
+- Add framework detection
+
+##### iOS
+
+- Fix preferred language update when only region or language value is changed
+
+##### Android
+
+- Fix notification UI crash when the required data is unavailable
+- Fix trampoline intent flow when the open events fail
+
 ## 5.1.0
 
 #### Native changes
