@@ -40,6 +40,7 @@ export interface ActitoNotification {
    * - `re.notifica.notification.Rate`
    * - `re.notifica.notification.Passbook`
    * - `re.notifica.notification.Store`
+   * - `re.notifica.notification.Pass`
    */
   readonly type: string;
 
