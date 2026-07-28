@@ -24,12 +24,15 @@ Updates the versions of the native libraries.
 #### Options
 * `version`: The version of the native libraries.
 * `platform`: The platform to update. Leave blank to update both.
+* `local`: Whether to use the local SPM instead of the remote.
 
 #### Examples
 ```sh
 bundle exec fastlane update_native_libraries version:3.4.0
 bundle exec fastlane update_native_libraries version:3.4.0 platform:android
 bundle exec fastlane update_native_libraries version:3.4.0 platform:ios
+bundle exec fastlane update_native_libraries version:3.4.0 local:true
+bundle exec fastlane update_native_libraries version:3.4.0 platform:ios local:true
 ```
 
 
