@@ -1,13 +1,12 @@
 # CHANGELOG
 
-## Upcoming release
+## 5.2.0
 
 - Add new Pass notification type (re.notifica.notification.Pass)
 - Add integration with Qualifio SDK
+- Add framework detection
 
 #### Native changes
-
-- Add framework detection
 
 ##### iOS
 
