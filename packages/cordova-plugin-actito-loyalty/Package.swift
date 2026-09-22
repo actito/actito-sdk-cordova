@@ -4,7 +4,7 @@ import PackageDescription
 
 let package = Package(
     name: "cordova-plugin-actito-loyalty",
-    platforms: [.iOS(.v13)],
+    platforms: [.iOS(.v15)],
     products: [
         .library(name: "cordova-plugin-actito-loyalty", targets: ["cordova-plugin-actito-loyalty"])
     ],

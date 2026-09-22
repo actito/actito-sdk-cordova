@@ -4,7 +4,7 @@ import PackageDescription
 
 let package = Package(
     name: "cordova-plugin-actito-push",
-    platforms: [.iOS(.v13)],
+    platforms: [.iOS(.v15)],
     products: [
         .library(name: "cordova-plugin-actito-push", targets: ["cordova-plugin-actito-push"])
     ],
