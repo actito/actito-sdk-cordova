@@ -10,7 +10,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/apache/cordova-ios.git", branch: "master"),
-        .package(url: "https://github.com/Actito/actito-sdk-ios.git", from: "5.2.0"),
+        .package(url: "https://github.com/Actito/actito-sdk-ios.git", from: "5.3.0"),
     ],
     targets: [
         .target(
