@@ -12,7 +12,8 @@
  * - `'provisional'` - Allows the ability to post noninterrupting notifications
  * provisionally to the Notification Center.
  * - `'criticalAlert'` - Allows the app to play sounds for critical alerts.
- * - `'announcement'` -  Allows notifications to be announced using voice assistance.
+ * - `'announcement'` - Deprecated. Announcement is always included on iOS 15
+ * and later.
  */
 export type ActitoAuthorizationOptions =
   | 'alert'

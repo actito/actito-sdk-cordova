@@ -70,10 +70,6 @@ class ActitoPushPlugin : CDVPlugin {
             if option == "criticalAlert" {
                 authorizationOptions = [authorizationOptions, .criticalAlert]
             }
-
-            if option == "announcement" {
-                authorizationOptions = [authorizationOptions, .announcement]
-            }
         }
 
         Actito.shared.push().authorizationOptions = authorizationOptions
@@ -102,10 +98,6 @@ class ActitoPushPlugin : CDVPlugin {
 
             if option == "hiddenPreviewsShowSubtitle" {
                 categoryOptions = [categoryOptions, .hiddenPreviewsShowSubtitle]
-            }
-
-            if option == "allowAnnouncement" {
-                categoryOptions = [categoryOptions, .allowAnnouncement]
             }
         }
 
