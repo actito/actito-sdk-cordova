@@ -3,6 +3,7 @@
 ## Upcoming release
 
 - Bump minimum deployment target to iOS 15 for XCode 27 compatibility
+- Deprecate `announcement` authorization option and `allowAnnouncement` category option as they have no effect on iOS 15 and later
 
 #### Native changes
 
