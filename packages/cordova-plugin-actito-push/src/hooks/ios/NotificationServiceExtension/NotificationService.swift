@@ -4,7 +4,7 @@
 
 import CoreGraphics
 import Foundation
-import MobileCoreServices
+import UniformTypeIdentifiers
 import UserNotifications
 
 class NotificationService: UNNotificationServiceExtension {
@@ -94,9 +94,9 @@ class NotificationService: UNNotificationServiceExtension {
                 ]
 
                 if let mimeType = response.mimeType,
-                   let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassMIMEType, mimeType as CFString, nil)
+                   let type = UTType(mimeType: mimeType)
                 {
-                    options[UNNotificationAttachmentOptionsTypeHintKey] = uti.takeRetainedValue()
+                    options[UNNotificationAttachmentOptionsTypeHintKey] = type.identifier
                 }
 
                 let attachment = try UNNotificationAttachment(identifier: "file_\(fileName)", url: filePath, options: options)
