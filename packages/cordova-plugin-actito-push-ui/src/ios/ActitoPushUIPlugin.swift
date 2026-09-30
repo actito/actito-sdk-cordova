@@ -10,7 +10,7 @@ import Cordova
 class ActitoPushUIPlugin : CDVPlugin {
     private var rootViewController: UIViewController? {
         get {
-            self.viewController.view.window?.rootViewController
+            self.viewController
         }
     }
 
