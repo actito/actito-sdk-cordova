@@ -16,11 +16,7 @@ class ActitoGeoPlugin : CDVPlugin {
     private var requestedPermissionCall: CDVInvokedUrlCommand?
 
     private var authorizationStatus: CLAuthorizationStatus {
-        if #available(iOS 14.0, *) {
-            return locationManager.authorizationStatus
-        }
-
-        return CLLocationManager.authorizationStatus()
+        locationManager.authorizationStatus
     }
 
     override func pluginInitialize() {
@@ -361,11 +357,6 @@ extension ActitoGeoPlugin: ActitoGeoDelegate {
 }
 
 extension ActitoGeoPlugin: CLLocationManagerDelegate {
-    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        handleAuthorizationChange(status)
-    }
-
-    @available(iOS 14.0, *)
     public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         handleAuthorizationChange(manager.authorizationStatus)
     }

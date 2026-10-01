@@ -38,7 +38,7 @@ Table of contents
 ## Requirements
 
 * Android 6 (API level 23) and above
-* iOS 13 and above
+* iOS 15 and above
 
 
 ## Getting Started

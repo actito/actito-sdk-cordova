@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## Upcoming release
+
+- Bump minimum deployment target to iOS 15 for XCode 27 compatibility
+- Deprecate `announcement` authorization option and `allowAnnouncement` category option as they have no effect on iOS 15 and later
+
+#### Native changes
+
+##### Android
+
+- Add string resources support for beacons foreground service notification title and text
+- Fix alert type notification dismissal during configuration changes
+- Fix notification activity action bar state during configuration changes
+- Fix scrolling for alert notification with actions when required
+
 ## 5.2.0
 
 - Add new Pass notification type (re.notifica.notification.Pass)
