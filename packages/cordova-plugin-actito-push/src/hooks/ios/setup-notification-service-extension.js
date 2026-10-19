@@ -69,7 +69,7 @@ function initialSetup(proj, extConfigRefs, appBundleID, extName) {
 function updateDeploymentTarget(proj, extConfigRefs, appConfig) {
   extConfigRefs.forEach((ref) => {
     proj.hash.project.objects['XCBuildConfiguration'][ref].buildSettings['IPHONEOS_DEPLOYMENT_TARGET'] =
-      appConfig.getPlatformPreference('deployment-target', 'ios') || '13.0';
+      appConfig.getPlatformPreference('deployment-target', 'ios') || '15.0';
   });
 }
 
