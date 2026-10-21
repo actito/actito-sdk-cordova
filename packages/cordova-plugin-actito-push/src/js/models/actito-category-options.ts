@@ -12,8 +12,8 @@
  * are hidden.
  * - `'hiddenPreviewsShowSubtitle'` - Displays the notification subtitle when
  * previews are hidden.
- * - `'allowAnnouncement'` - Allows notifications in this category to be announced
- * using voice assistance.
+ * - `'allowAnnouncement'` - Deprecated. This option is ignored on iOS 15 and
+ * later.
  */
 export type ActitoCategoryOptions =
   | 'customDismissAction'

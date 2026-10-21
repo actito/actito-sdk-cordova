@@ -10,7 +10,7 @@ import Cordova
 class ActitoPushUIPlugin : CDVPlugin {
     private var rootViewController: UIViewController? {
         get {
-            self.viewController.view.window?.rootViewController
+            self.viewController
         }
     }
 
@@ -113,11 +113,7 @@ class ActitoPushUIPlugin : CDVPlugin {
         if let colorStr = theme?.backgroundColor {
             navigationController.view.backgroundColor = UIColor(hexString: colorStr)
         } else {
-            if #available(iOS 13.0, *) {
-                navigationController.view.backgroundColor = .systemBackground
-            } else {
-                navigationController.view.backgroundColor = .white
-            }
+            navigationController.view.backgroundColor = .systemBackground
         }
 
         return navigationController
